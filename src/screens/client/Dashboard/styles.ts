@@ -18,4 +18,6 @@ export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
 	font-size: ${RFValue(20)}px;
 	color: ${({ theme }) => theme.colors.title};
+
+	margin-bottom: 15px;
 `;
