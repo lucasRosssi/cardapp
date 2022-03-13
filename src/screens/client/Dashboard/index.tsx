@@ -1,15 +1,20 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Header } from '../../../components/Header';
 
-import { Container } from './styles';
+import { Header } from '../../../components/Header';
+import { RestaurantCard } from '../../../components/RestaurantCard';
+
+import { Container, Content, Title } from './styles';
 
 export function Dashboard() {
 	return (
 		<Container>
 			<Header />
 
-			<Text>DASHBOARD</Text>
+			<Content>
+				<Title>Restaurantes</Title>
+
+				<RestaurantCard />
+			</Content>
 		</Container>
 	);
 }
