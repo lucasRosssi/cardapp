@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { useFonts } from 'expo-font';
 
-import { Dashboard } from './src/screens/Dashboard';
+import { Dashboard } from './src/screens/client/Dashboard';
 
 import {
 	Poppins_400Regular,
@@ -34,7 +34,7 @@ export default function App() {
 			<StatusBar
 				translucent
 				backgroundColor="transparent"
-				barStyle="dark-content"
+				barStyle="light-content"
 			/>
 			<Dashboard />
 		</ThemeProvider>
