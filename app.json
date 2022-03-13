@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "cardapp",
+    "slug": "cardapp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "cardapp"
+}
