@@ -14,6 +14,9 @@ export function Dashboard() {
 				<Title>Restaurantes</Title>
 
 				<RestaurantCard />
+				<RestaurantCard />
+				<RestaurantCard />
+				<RestaurantCard />
 			</Content>
 		</Container>
 	);

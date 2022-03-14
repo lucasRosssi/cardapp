@@ -8,11 +8,10 @@ export const Container = styled.View`
 	background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Content = styled.View`
-	width: 100%;
-
-	padding: 20px;
-`;
+export const Content = styled.ScrollView.attrs({
+	width: '100%',
+	padding: 20,
+})``;
 
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
