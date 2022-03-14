@@ -1,12 +1,13 @@
 export default {
 	colors: {
-		background: '#F7F7F7',
+		background: '#E6E6E6',
 		primary: '#59B7FF',
 		primary_light: '#ADF0FF',
 		secondary: '#454545',
 		shape: '#F5F5F5',
 		success: '#5CD65A',
 		attention: '#E62929',
+		separator: '#D4D4D4',
 		text: '#6E6E6E',
 		title: '#2E2E2E',
 	},
