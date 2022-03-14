@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 
@@ -6,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { useFonts } from 'expo-font';
 
 import { Dashboard } from './src/screens/client/Dashboard';
+import { DishesMenu } from './src/screens/client/DishesMenu';
 
 import {
 	Poppins_400Regular,
@@ -36,7 +39,7 @@ export default function App() {
 				backgroundColor="transparent"
 				barStyle="light-content"
 			/>
-			<Dashboard />
+			<DishesMenu />
 		</ThemeProvider>
 	);
 }
