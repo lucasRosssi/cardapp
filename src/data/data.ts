@@ -55,7 +55,7 @@ export const cocktails: CategoryDishes[] = [
 	{
 		name: 'Caipirinha',
 		picture:
-			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzE3k3bdJGU8qf0E4Dz55CDRn3eGt-P1UorA&usqp=CAU',
+			'https://super.abril.com.br/wp-content/uploads/2017/12/caipirinha.png',
 		price: 15,
 	},
 	{
@@ -63,5 +63,17 @@ export const cocktails: CategoryDishes[] = [
 		picture:
 			'https://cadareceita.com.br/wp-content/uploads/2020/08/mojito-feepik-480x270.jpg',
 		price: 20,
+	},
+	{
+		name: 'Manhattan',
+		picture:
+			'https://www.elhombre.com.br/wp-content/uploads/2017/03/10-things-Master-2-768x512.jpg',
+		price: 30,
+	},
+	{
+		name: 'Cosmopolitan',
+		picture:
+			'https://amandascookin.com/wp-content/uploads/2021/05/Cosmopolitan-Cocktail-RC.jpg',
+		price: 28,
 	},
 ];
