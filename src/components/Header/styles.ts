@@ -2,9 +2,11 @@ import styled from 'styled-components/native';
 
 import { RFValue } from 'react-native-responsive-fontsize';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
 	width: 100%;
+	height: ${RFValue(100)}px;
 
 	background-color: ${({ theme }) => theme.colors.primary};
 
@@ -12,7 +14,7 @@ export const Container = styled.View`
 	justify-content: space-between;
 	align-items: center;
 
-	padding: ${getStatusBarHeight() + 20}px 30px 20px 20px;
+	padding: ${getStatusBarHeight() + 10}px 25px 10px 25px;
 
 	elevation: 10;
 `;
@@ -41,4 +43,9 @@ export const Username = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
 	font-size: ${RFValue(20)}px;
 	color: ${({ theme }) => theme.colors.shape};
+`;
+
+export const BackButton = styled(BorderlessButton)`
+	align-items: center;
+	justify-content: center;
 `;
