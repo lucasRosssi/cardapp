@@ -16,16 +16,16 @@ export const Profile = styled.View`
 `;
 
 export const Picture = styled.Pressable`
-	width: ${RFValue(100)}px;
-	height: ${RFValue(100)}px;
+	width: ${RFValue(150)}px;
+	height: ${RFValue(150)}px;
 
 	margin-bottom: 10px;
 `;
 
 export const Image = styled.Image`
-	width: ${RFValue(100)}px;
-	height: ${RFValue(100)}px;
-	border-radius: ${RFValue(50)}px;
+	width: ${RFValue(150)}px;
+	height: ${RFValue(150)}px;
+	border-radius: ${RFValue(75)}px;
 `;
 
 export const Name = styled.Text`
