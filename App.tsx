@@ -1,15 +1,11 @@
-import 'react-native-gesture-handler';
-
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 
 import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import theme from './src/styles/theme';
+
 import { useFonts } from 'expo-font';
-
-import { Dashboard } from './src/screens/client/Dashboard';
-import { DishesMenu } from './src/screens/client/DishesMenu';
-
 import {
 	Poppins_400Regular,
 	Poppins_700Bold,
@@ -18,7 +14,10 @@ import {
 	Rajdhani_400Regular,
 	Rajdhani_700Bold,
 } from '@expo-google-fonts/rajdhani';
-import theme from './src/styles/theme';
+
+import { AuthProvider } from './src/contexts/AuthContext';
+
+import { Routes } from './src/routes';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -33,13 +32,15 @@ export default function App() {
 	}
 
 	return (
-		<ThemeProvider theme={theme}>
-			<StatusBar
-				translucent
-				backgroundColor="transparent"
-				barStyle="light-content"
-			/>
-			<DishesMenu />
-		</ThemeProvider>
+		<AuthProvider>
+			<ThemeProvider theme={theme}>
+				<StatusBar
+					translucent
+					backgroundColor="transparent"
+					barStyle="light-content"
+				/>
+				<Routes />
+			</ThemeProvider>
+		</AuthProvider>
 	);
 }
