@@ -1,5 +1,7 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+
 import { AppIcon } from '../AppIcon';
 import { Separator } from '../Separator';
 
@@ -16,6 +18,11 @@ import {
 
 export function RestaurantCard() {
 	const theme = useTheme();
+	const { navigate } = useNavigation();
+
+	function handleGoToDishesMenu() {
+		navigate('DishesMenu');
+	}
 
 	return (
 		<Container>
@@ -42,7 +49,7 @@ export function RestaurantCard() {
 					<AppIcon name="location" color={theme.colors.primary} size={25} />
 				</Button>
 
-				<Button>
+				<Button onPress={handleGoToDishesMenu}>
 					<AppIcon name="food-menu" color={theme.colors.primary} size={25} />
 				</Button>
 
