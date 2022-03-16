@@ -12,6 +12,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 interface AppIconProps {
 	name:
 		| 'chevron-down'
+		| 'chevron-left'
 		| 'comment'
 		| 'food-menu'
 		| 'gallery'
@@ -20,7 +21,8 @@ interface AppIconProps {
 		| 'like-outline'
 		| 'location'
 		| 'menu'
-		| 'settings';
+		| 'settings'
+		| 'user';
 	size?: number;
 	color?: string;
 }
@@ -30,6 +32,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 		<>
 			{name === 'chevron-down' && (
 				<Feather name="chevron-down" size={RFValue(size)} color={color} />
+			)}
+			{name === 'chevron-left' && (
+				<Feather name="chevron-left" size={RFValue(size)} color={color} />
 			)}
 			{name === 'comment' && (
 				<MaterialCommunityIcons
@@ -65,6 +70,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'settings' && (
 				<Ionicons name="settings-sharp" size={RFValue(size)} color={color} />
+			)}
+			{name === 'user' && (
+				<Feather name="user" size={RFValue(size)} color={color} />
 			)}
 		</>
 	);
