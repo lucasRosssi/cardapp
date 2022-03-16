@@ -27,7 +27,7 @@ export const DishesList = styled.ScrollView.attrs({
 	horizontal: true,
 	showsHorizontalScrollIndicator: false,
 	contentContainerStyle: {
-		paddingHorizontal: 40,
+		paddingHorizontal: 20,
 		paddingVertical: 20,
 		marginBottom: 20,
 	},
