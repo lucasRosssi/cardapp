@@ -29,17 +29,7 @@ export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 
 				<CategoryName>{category}</CategoryName>
 			</CategoryWrapper>
-			<DishesList
-				horizontal
-				showsHorizontalScrollIndicator={false}
-				contentContainerStyle={{
-					paddingHorizontal: 40,
-					paddingVertical: 20,
-					marginBottom: 20,
-				}}
-			>
-				{dishes_list}
-			</DishesList>
+			<DishesList>{dishes_list}</DishesList>
 		</Container>
 	);
 }
