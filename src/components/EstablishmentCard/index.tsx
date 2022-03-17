@@ -16,7 +16,12 @@ import {
 	RightContent,
 } from './styles';
 
-export function RestaurantCard() {
+interface EstablishmentCardProps {
+	name: string;
+	picture: string;
+}
+
+export function EstablishmentCard({ name, picture }: EstablishmentCardProps) {
 	const theme = useTheme();
 	const { navigate } = useNavigation();
 
@@ -28,7 +33,7 @@ export function RestaurantCard() {
 		<Container>
 			<LeftContent>
 				<Header>
-					<Name>Restaurante Tudo de Bom</Name>
+					<Name>{name}</Name>
 				</Header>
 
 				<Separator color={theme.colors.separator} />
@@ -36,7 +41,7 @@ export function RestaurantCard() {
 				<Content>
 					<Picture
 						source={{
-							uri: 'https://vinicolaaraucaria.com.br/wp-content/uploads/2020/06/interna_restaurante-1-1400x700.jpg',
+							uri: picture,
 						}}
 					/>
 				</Content>
