@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
-	flex: 1;
-
 	background-color: ${({ theme }) => theme.colors.background};
+
+	padding: 0 20px;
 `;
 
 export const Profile = styled.View`
@@ -12,14 +12,12 @@ export const Profile = styled.View`
 
 	align-items: center;
 
-	margin-top: 30px;
+	margin: 30px 0;
 `;
 
 export const Picture = styled.Pressable`
 	width: ${RFValue(150)}px;
 	height: ${RFValue(150)}px;
-
-	margin-bottom: 10px;
 `;
 
 export const Image = styled.Image`
@@ -28,8 +26,10 @@ export const Image = styled.Image`
 	border-radius: ${RFValue(75)}px;
 `;
 
-export const Name = styled.Text`
-	font-family: ${({ theme }) => theme.fonts.primary_bold};
-	font-size: ${RFValue(20)}px;
-	color: ${({ theme }) => theme.colors.title};
+export const FormWrapper = styled.View`
+	height: ${RFValue(150)}px;
+
+	justify-content: space-between;
+
+	margin-bottom: 40px;
 `;
