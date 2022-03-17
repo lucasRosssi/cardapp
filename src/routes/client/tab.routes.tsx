@@ -29,13 +29,14 @@ export function ClientTabRoutes() {
 		<TabNavigator
 			screenOptions={{
 				headerShown: false,
-				tabBarActiveBackgroundColor: theme.colors.shape,
-				tabBarInactiveBackgroundColor: theme.colors.primary,
+				tabBarActiveBackgroundColor: theme.colors.full_light,
+				tabBarInactiveBackgroundColor: theme.colors.full_light,
 				tabBarStyle: {
-					height: RFValue(50),
+					height: RFValue(45),
 					elevation: 10,
 				},
 				tabBarShowLabel: false,
+				tabBarHideOnKeyboard: true,
 			}}
 			backBehavior="history"
 		>
@@ -46,8 +47,10 @@ export function ClientTabRoutes() {
 					tabBarIcon: ({ focused }) =>
 						AppIcon({
 							name: 'food-menu',
-							color: focused ? theme.colors.primary : theme.colors.shape,
-							size: 30,
+							color: focused
+								? theme.colors.primary
+								: theme.colors.item_inactive,
+							size: 25,
 						}),
 				}}
 			/>
@@ -58,8 +61,10 @@ export function ClientTabRoutes() {
 					tabBarIcon: ({ focused }) =>
 						AppIcon({
 							name: 'user',
-							color: focused ? theme.colors.primary : theme.colors.shape,
-							size: 30,
+							color: focused
+								? theme.colors.primary
+								: theme.colors.item_inactive,
+							size: 25,
 						}),
 				}}
 			/>
@@ -70,8 +75,10 @@ export function ClientTabRoutes() {
 					tabBarIcon: ({ focused }) =>
 						AppIcon({
 							name: 'settings',
-							color: focused ? theme.colors.primary : theme.colors.shape,
-							size: 30,
+							color: focused
+								? theme.colors.primary
+								: theme.colors.item_inactive,
+							size: 25,
 						}),
 				}}
 			/>
