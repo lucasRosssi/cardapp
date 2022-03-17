@@ -8,8 +8,10 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.ScrollView.attrs({
-	width: '100%',
-	paddingVertical: 20,
+	contentContainerStyle: {
+		width: '100%',
+		paddingVertical: 20,
+	},
 })``;
 
 export const Title = styled.Text`
