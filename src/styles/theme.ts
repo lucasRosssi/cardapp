@@ -1,6 +1,8 @@
 export default {
 	colors: {
 		background: '#E6E6E6',
+		full_light: '#FFFFFF',
+		item_inactive: '#AAAAAA',
 		primary: '#59B7FF',
 		primary_light: '#ADF0FF',
 		secondary: '#454545',
