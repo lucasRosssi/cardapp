@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { KeyboardAvoidingView } from 'react-native';
 import { useAuth } from '../../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
 
 import * as ImagePicker from 'expo-image-picker';
 
@@ -8,10 +10,11 @@ import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 
 import { Container, Profile, Picture, Image, FormWrapper } from './styles';
-import { KeyboardAvoidingView } from 'react-native';
 
 export function MyProfile() {
 	const { user, handleUpdateUser } = useAuth();
+	const { navigate } = useNavigation();
+
 	const [picture, setPicture] = useState(user.picture);
 	const [fullName, setFullName] = useState(user.full_name);
 	const [fullNameError, setFullNameError] = useState('');
@@ -59,6 +62,8 @@ export function MyProfile() {
 			picture,
 		});
 		setFullName(fullName.trim());
+
+		navigate('Dashboard');
 	}
 
 	return (
