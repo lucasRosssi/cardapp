@@ -4,6 +4,39 @@ interface CategoryDishes {
 	price: number;
 }
 
+interface Establishments {
+	name: string;
+	picture: string;
+}
+
+export const establishments: Establishments[] = [
+	{
+		name: 'Restaurante Maravilha',
+		picture:
+			'https://revistamenu.com.br/wp-content/uploads/2021/12/vastosp.jpg',
+	},
+	{
+		name: 'Luxury Bar',
+		picture:
+			'http://magazine.luxevile.com/wp-content/uploads/2016/01/2.-Bluumbar.png',
+	},
+	{
+		name: 'Cruise Bar',
+		picture:
+			'https://galeriemagazine.com/wp-content/uploads/2020/01/MAIN_BG_Goodman_Environmental_Hero_0007_RT-1920x1200.jpg',
+	},
+	{
+		name: 'Food Coast',
+		picture:
+			'https://welcometoibiza.com/wp-content/uploads/Atzaro-Beach-Ibiza-2020-02.jpg',
+	},
+	{
+		name: 'Sea Shore Restaurant',
+		picture:
+			'https://magazine.amaselections.com/wp-content/uploads/2020/05/main-lareserve.jpg',
+	},
+];
+
 export const seafood_dishes: CategoryDishes[] = [
 	{
 		name: 'Camarão na Moranga',
