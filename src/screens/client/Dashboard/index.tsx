@@ -1,22 +1,24 @@
 import React from 'react';
 
 import { Header } from '../../../components/Header';
-import { RestaurantCard } from '../../../components/RestaurantCard';
+import { EstablishmentCard } from '../../../components/EstablishmentCard';
+import { establishments } from '../../../data/data';
 
 import { Container, Content, Title } from './styles';
 
 export function Dashboard() {
+	const restaurantsList = establishments.map(({ name, picture }) => (
+		<EstablishmentCard key={name} name={name} picture={picture} />
+	));
+
 	return (
 		<Container>
 			<Header />
 
 			<Content>
-				<Title>Restaurantes</Title>
+				<Title>Estabelecimentos</Title>
 
-				<RestaurantCard />
-				<RestaurantCard />
-				<RestaurantCard />
-				<RestaurantCard />
+				<>{restaurantsList}</>
 			</Content>
 		</Container>
 	);
