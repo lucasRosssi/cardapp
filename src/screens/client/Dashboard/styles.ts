@@ -1,16 +1,18 @@
-import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
 	flex: 1;
-	width: 100%;
 
 	background-color: ${({ theme }) => theme.colors.background};
 `;
 
 export const Content = styled.ScrollView.attrs({
-	width: '100%',
-	padding: 20,
+	contentContainerStyle: {
+		width: '100%',
+		paddingVertical: 20,
+		paddingHorizontal: 20,
+	},
 })``;
 
 export const Title = styled.Text`
