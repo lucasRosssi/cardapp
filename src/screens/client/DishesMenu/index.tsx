@@ -32,7 +32,7 @@ export function DishesMenu() {
 			<Header />
 
 			<Content>
-				<Title>Restaurante Tudo de Bom</Title>
+				<Title>Sea Shore Restaurant</Title>
 
 				<Categories>{categories_dishes}</Categories>
 			</Content>
