@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView } from 'react-native';
+import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,6 +13,7 @@ import { Button } from '../../../components/Button';
 import { Container, Profile, Picture, Image, FormWrapper } from './styles';
 
 export function MyProfile() {
+	const theme = useTheme();
 	const { user, handleUpdateUser } = useAuth();
 	const { navigate } = useNavigation();
 
@@ -86,7 +88,10 @@ export function MyProfile() {
 	return (
 		<>
 			<Header />
-			<KeyboardAvoidingView behavior="position">
+			<KeyboardAvoidingView
+				behavior="position"
+				style={{ backgroundColor: theme.colors.background }}
+			>
 				<Container>
 					<Profile>
 						<Picture onPress={handleChangeProfilePicture}>
