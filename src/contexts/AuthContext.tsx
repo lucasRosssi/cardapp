@@ -3,6 +3,7 @@ import React, { createContext, ReactNode, useEffect, useState } from 'react';
 interface UserDTO {
 	full_name: string;
 	first_name: string;
+	city: string;
 	picture: string;
 }
 
@@ -21,6 +22,7 @@ export function AuthProvider({ children }: AuthContextProps) {
 	const [user, setUser] = useState<UserDTO>({
 		full_name: 'Lucas Rossi',
 		first_name: 'Lucas',
+		city: 'Niterói',
 		picture: 'https://www.github.com/lucasRosssi.png',
 	} as UserDTO);
 
