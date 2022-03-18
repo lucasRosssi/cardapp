@@ -21,14 +21,9 @@ export const establishments: Establishments[] = [
 			'http://magazine.luxevile.com/wp-content/uploads/2016/01/2.-Bluumbar.png',
 	},
 	{
-		name: 'Cruise Bar',
+		name: 'The Cruise Bar',
 		picture:
 			'https://galeriemagazine.com/wp-content/uploads/2020/01/MAIN_BG_Goodman_Environmental_Hero_0007_RT-1920x1200.jpg',
-	},
-	{
-		name: 'Food Coast',
-		picture:
-			'https://welcometoibiza.com/wp-content/uploads/Atzaro-Beach-Ibiza-2020-02.jpg',
 	},
 	{
 		name: 'Sea Shore Restaurant',
@@ -106,7 +101,7 @@ export const cocktails: CategoryDishes[] = [
 	{
 		name: 'Cosmopolitan',
 		picture:
-			'https://amandascookin.com/wp-content/uploads/2021/05/Cosmopolitan-Cocktail-RC.jpg',
+			'https://assets-prd.punchdrink.com/wp-content/uploads/2020/03/13102145/Article-Ultimate-Cosmo-Cosmopolitan-Cocktail-Recipe.jpg',
 		price: 28,
 	},
 ];
