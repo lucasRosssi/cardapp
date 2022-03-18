@@ -18,6 +18,8 @@ export function MyProfile() {
 	const [picture, setPicture] = useState(user.picture);
 	const [fullName, setFullName] = useState(user.full_name);
 	const [fullNameError, setFullNameError] = useState('');
+	const [city, setCity] = useState(user.city);
+	const [cityError, setCityError] = useState('');
 
 	async function handleChangeProfilePicture() {
 		let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -40,18 +42,32 @@ export function MyProfile() {
 		}
 	}
 
-	function handleTypeOnInput(value: string) {
+	function handleTypeName(value: string) {
 		setFullName(value);
 		if (fullNameError) {
 			setFullNameError('');
 		}
 	}
 
+	function handleTypeCity(value: string) {
+		setCity(value);
+		if (cityError) {
+			setCityError('');
+		}
+	}
+
 	function handleUpdateChanges() {
 		if (!fullName) {
-			setFullNameError('É necessário colocar um nome');
+			setFullNameError('É necessário digitar um nome');
+		}
+		if (!city) {
+			setCityError('É necessário digitar uma cidade');
+		}
+
+		if (!fullName || !city) {
 			return;
 		}
+
 		const formattedFullName = fullName.trim();
 		const firstName = formattedFullName.split(' ')[0];
 
@@ -59,6 +75,7 @@ export function MyProfile() {
 			...user,
 			full_name: fullName,
 			first_name: firstName,
+			city,
 			picture,
 		});
 		setFullName(fullName.trim());
@@ -81,10 +98,15 @@ export function MyProfile() {
 						<Input
 							topPlaceholder="Nome"
 							value={fullName}
-							onChangeText={(value) => handleTypeOnInput(value)}
+							onChangeText={handleTypeName}
 							error={fullNameError}
 						/>
-						<Input topPlaceholder="E-mail" />
+						<Input
+							topPlaceholder="Cidade"
+							value={city}
+							onChangeText={handleTypeCity}
+							error={cityError}
+						/>
 					</FormWrapper>
 
 					<Button title="Salvar" onPress={handleUpdateChanges} />
