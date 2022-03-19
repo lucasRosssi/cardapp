@@ -5,6 +5,8 @@ import { useTheme } from 'styled-components';
 import { AppIcon } from '../AppIcon';
 import { Separator } from '../Separator';
 
+import { MenuDTO } from '../../dtos/EstablishmentDTO';
+
 import {
 	Container,
 	Header,
@@ -19,14 +21,19 @@ import {
 interface EstablishmentCardProps {
 	name: string;
 	picture: string;
+	menu: MenuDTO[];
 }
 
-export function EstablishmentCard({ name, picture }: EstablishmentCardProps) {
+export function EstablishmentCard({
+	name,
+	picture,
+	menu,
+}: EstablishmentCardProps) {
 	const theme = useTheme();
 	const { navigate } = useNavigation();
 
 	function handleGoToDishesMenu() {
-		navigate('DishesMenu');
+		navigate('DishesMenu', { name, menu });
 	}
 
 	return (
