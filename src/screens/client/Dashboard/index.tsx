@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { api } from '../../../services/api';
 
 import { Header } from '../../../components/Header';
 import { EstablishmentCard } from '../../../components/EstablishmentCard';
-import { establishments } from '../../../data/data';
+import { LoadingIndicator } from '../../../components/LoadingIndicator';
 
-import { Container, Content, Title } from './styles';
+import { EstablishmentDTO } from '../../../dtos/EstablishmentDTO';
+
+import { Container, Content, EstablishmentsList, Title } from './styles';
 
 export function Dashboard() {
-	const restaurantsList = establishments.map(({ name, picture }) => (
-		<EstablishmentCard key={name} name={name} picture={picture} />
-	));
+	const [isLoading, setIsLoading] = useState(true);
+	const [establishments, setEstablishments] = useState<EstablishmentDTO[]>([]);
+
+	async function fetchEstablishments() {
+		try {
+			const response = await api.get('/establishments');
+			console.log(response.data);
+			setEstablishments(response.data);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
+	}
+
+	useEffect(() => {
+		fetchEstablishments();
+	}, []);
 
 	return (
 		<Container>
@@ -18,7 +36,21 @@ export function Dashboard() {
 			<Content>
 				<Title>Estabelecimentos</Title>
 
-				<>{restaurantsList}</>
+				{isLoading ? (
+					<LoadingIndicator />
+				) : (
+					<EstablishmentsList
+						data={establishments}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => (
+							<EstablishmentCard
+								name={item.name}
+								picture={item.picture}
+								menu={item.menu}
+							/>
+						)}
+					/>
+				)}
 			</Content>
 		</Container>
 	);
