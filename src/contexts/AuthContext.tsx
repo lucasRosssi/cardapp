@@ -1,11 +1,5 @@
-import React, { createContext, ReactNode, useEffect, useState } from 'react';
-
-interface UserDTO {
-	full_name: string;
-	first_name: string;
-	city: string;
-	picture: string;
-}
+import React, { createContext, ReactNode, useState } from 'react';
+import { UserDTO } from '../dtos/UserDTO';
 
 export interface IAuthContextData {
 	user: UserDTO;
@@ -19,12 +13,7 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: AuthContextProps) {
-	const [user, setUser] = useState<UserDTO>({
-		full_name: 'Lucas Rossi',
-		first_name: 'Lucas',
-		city: 'Niterói',
-		picture: 'https://www.github.com/lucasRosssi.png',
-	} as UserDTO);
+	const [user, setUser] = useState<UserDTO>({} as UserDTO);
 
 	function handleUpdateUser(data: UserDTO) {
 		setUser(data);
@@ -33,7 +22,12 @@ export function AuthProvider({ children }: AuthContextProps) {
 	return (
 		<AuthContext.Provider
 			value={{
-				user,
+				user: {
+					full_name: 'Lucas Rossi',
+					first_name: 'Lucas',
+					city: 'Niterói',
+					picture: 'https://www.github.com/lucasRosssi.png',
+				},
 				handleUpdateUser,
 			}}
 		>
