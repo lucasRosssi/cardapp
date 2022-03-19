@@ -1,4 +1,5 @@
 import React from 'react';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 import {
 	Feather,
@@ -7,10 +8,10 @@ import {
 	MaterialCommunityIcons,
 	AntDesign,
 } from '@expo/vector-icons';
-import { RFValue } from 'react-native-responsive-fontsize';
 
 interface AppIconProps {
 	name:
+		| 'camera'
 		| 'chevron-down'
 		| 'chevron-left'
 		| 'comment'
@@ -30,6 +31,9 @@ interface AppIconProps {
 export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 	return (
 		<>
+			{name === 'camera' && (
+				<Feather name="camera" size={RFValue(size)} color={color} />
+			)}
 			{name === 'chevron-down' && (
 				<Feather name="chevron-down" size={RFValue(size)} color={color} />
 			)}
