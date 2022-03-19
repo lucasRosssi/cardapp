@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { useTheme } from 'styled-components';
@@ -29,12 +30,13 @@ export function ClientTabRoutes() {
 		<TabNavigator
 			screenOptions={{
 				headerShown: false,
-				tabBarActiveBackgroundColor: theme.colors.full_light,
-				tabBarInactiveBackgroundColor: theme.colors.full_light,
 				tabBarStyle: {
 					height: RFValue(45),
 					elevation: 10,
+					backgroundColor: theme.colors.full_light,
 				},
+				tabBarActiveTintColor: theme.colors.primary,
+				tabBarInactiveTintColor: theme.colors.item_inactive,
 				tabBarShowLabel: false,
 				tabBarHideOnKeyboard: true,
 			}}
@@ -44,42 +46,69 @@ export function ClientTabRoutes() {
 				name="Home"
 				component={ClientStackRoutes}
 				options={{
-					tabBarIcon: ({ focused }) =>
-						AppIcon({
-							name: 'food-menu',
-							color: focused
-								? theme.colors.primary
-								: theme.colors.item_inactive,
-							size: 25,
-						}),
+					tabBarIcon: ({ color, focused }) => (
+						<>
+							<AppIcon name="food-menu" color={color} size={25} />
+							<View
+								style={
+									focused && {
+										position: 'absolute',
+										bottom: 0,
+										width: RFValue(80),
+										height: 3,
+										backgroundColor: color,
+										borderRadius: RFValue(50),
+									}
+								}
+							/>
+						</>
+					),
 				}}
 			/>
 			<TabScreen
 				name="MyProfile"
 				component={MyProfile}
 				options={{
-					tabBarIcon: ({ focused }) =>
-						AppIcon({
-							name: 'user',
-							color: focused
-								? theme.colors.primary
-								: theme.colors.item_inactive,
-							size: 25,
-						}),
+					tabBarIcon: ({ color, focused }) => (
+						<>
+							<AppIcon name="user" color={color} size={25} />
+							<View
+								style={
+									focused && {
+										position: 'absolute',
+										bottom: 0,
+										width: RFValue(80),
+										height: 3,
+										backgroundColor: color,
+										borderRadius: RFValue(50),
+									}
+								}
+							/>
+						</>
+					),
 				}}
 			/>
 			<TabScreen
 				name="Settings"
 				component={Settings}
 				options={{
-					tabBarIcon: ({ focused }) =>
-						AppIcon({
-							name: 'settings',
-							color: focused
-								? theme.colors.primary
-								: theme.colors.item_inactive,
-							size: 25,
-						}),
+					tabBarIcon: ({ color, focused }) => (
+						<>
+							<AppIcon name="settings" color={color} size={25} />
+							<View
+								style={
+									focused && {
+										position: 'absolute',
+										bottom: 0,
+										width: RFValue(80),
+										height: 3,
+										backgroundColor: color,
+										borderRadius: RFValue(50),
+									}
+								}
+							/>
+						</>
+					),
 				}}
 			/>
 		</TabNavigator>
