@@ -1,29 +1,19 @@
 import React from 'react';
+import { useRoute } from '@react-navigation/native';
 
 import { Header } from '../../../components/Header';
 import { CategoryDishes } from '../../../components/CategoryDishes';
 
-import { cocktails, mexican_dishes, seafood_dishes } from '../../../data/data';
-
 import { Container, Content, Title, Categories } from './styles';
 
-export function DishesMenu() {
-	const dishes_menu = [
-		{
-			category: 'Frutos do Mar',
-			dishes: seafood_dishes,
-		},
-		{
-			category: 'Comida Mexicana',
-			dishes: mexican_dishes,
-		},
-		{
-			category: 'Drinks',
-			dishes: cocktails,
-		},
-	];
+import { RootStackParamList } from '../../../routes/client/stack.routes';
 
-	const categories_dishes = dishes_menu.map(({ category, dishes }) => (
+export function DishesMenu() {
+	const route = useRoute();
+
+	const { name, menu } = route.params as RootStackParamList['DishesMenu'];
+
+	const categories_dishes = menu.map(({ category, dishes }) => (
 		<CategoryDishes key={category} category={category} dishes={dishes} />
 	));
 
@@ -32,7 +22,7 @@ export function DishesMenu() {
 			<Header />
 
 			<Content>
-				<Title>Sea Shore Restaurant</Title>
+				<Title>{name}</Title>
 
 				<Categories>{categories_dishes}</Categories>
 			</Content>
