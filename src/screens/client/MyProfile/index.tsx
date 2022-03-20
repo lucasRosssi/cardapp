@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
@@ -10,7 +10,15 @@ import { Header } from '../../../components/Header';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 
-import { Container, Profile, Picture, Image, FormWrapper } from './styles';
+import {
+	Container,
+	Profile,
+	Picture,
+	Image,
+	CameraWrapper,
+	FormWrapper,
+} from './styles';
+import { AppIcon } from '../../../components/AppIcon';
 
 export function MyProfile() {
 	const theme = useTheme();
@@ -22,6 +30,8 @@ export function MyProfile() {
 	const [fullNameError, setFullNameError] = useState('');
 	const [city, setCity] = useState(user.city);
 	const [cityError, setCityError] = useState('');
+
+	const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
 	async function handleChangeProfilePicture() {
 		let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -85,19 +95,40 @@ export function MyProfile() {
 		navigate('Dashboard');
 	}
 
+	useEffect(() => {
+		const showKeyboard = Keyboard.addListener('keyboardDidShow', () =>
+			setIsKeyboardShown(true)
+		);
+		const hideKeyboard = Keyboard.addListener('keyboardDidHide', () =>
+			setIsKeyboardShown(false)
+		);
+
+		return () => {
+			setIsKeyboardShown(false);
+			Keyboard.removeSubscription(showKeyboard);
+			Keyboard.removeSubscription(hideKeyboard);
+		};
+	}, []);
+
 	return (
 		<>
 			<Header />
-			<KeyboardAvoidingView
-				behavior="position"
-				style={{ backgroundColor: theme.colors.background }}
-			>
+
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<Container>
-					<Profile>
-						<Picture onPress={handleChangeProfilePicture}>
-							<Image source={{ uri: picture }} />
-						</Picture>
-					</Profile>
+					{!isKeyboardShown ? (
+						<Profile>
+							<Picture onPress={handleChangeProfilePicture}>
+								<Image source={{ uri: picture }} />
+
+								<CameraWrapper>
+									<AppIcon name="camera" size={20} color={theme.colors.shape} />
+								</CameraWrapper>
+							</Picture>
+						</Profile>
+					) : (
+						<Profile />
+					)}
 
 					<FormWrapper>
 						<Input
@@ -116,7 +147,7 @@ export function MyProfile() {
 
 					<Button title="Salvar" onPress={handleUpdateChanges} />
 				</Container>
-			</KeyboardAvoidingView>
+			</TouchableWithoutFeedback>
 		</>
 	);
 }
