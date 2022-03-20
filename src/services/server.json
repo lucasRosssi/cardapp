@@ -1,0 +1,93 @@
+{
+	"establishments": [
+		{
+			"id": "1",
+			"name": "The Finesse",
+			"picture": "https://revistamenu.com.br/wp-content/uploads/2021/12/vastosp.jpg",
+			"menu": [
+				{
+					"category": "Entradas",
+					"dishes": [
+						{
+							"name": "Pão Australiano",
+							"picture": "https://cdn.sistemawbuy.com.br/arquivos/e408fa5795348f554cf459a2cbafd9a7/produtos/SEI8CU6/produtos-andraty-site-611ebc9429b81.jpg",
+							"price": 15
+						},
+						{
+							"name": "Bruschetta",
+							"picture": "https://www.debemcomacomida.com.br/wp-content/uploads/2020/09/italian-bruschettas-7433A4M-scaled.jpg",
+							"price": 18
+						},
+						{
+							"name": "Batata Recheada",
+							"picture": "https://ruralea.com/wp-content/uploads/2021/02/na_5e2f0d3d00fc0-750x500.jpg",
+							"price": 15
+						},
+						{
+							"name": "Conquilhas à Algarvia",
+							"picture": "https://ruralea.com/wp-content/uploads/2020/12/d109fc84955f2d15e587ba7a169cb909-300x200.jpg",
+							"price": 15
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "2",
+			"name": "The Cruise Bar",
+			"picture": "https://galeriemagazine.com/wp-content/uploads/2020/01/MAIN_BG_Goodman_Environmental_Hero_0007_RT-1920x1200.jpg",
+			"menu": [
+				{
+					"category": "Frutos do Mar",
+					"dishes": [
+						{
+							"name": "Camarão na Moranga",
+							"picture": "http://s2.glbimg.com/2bYPQwzADk77RnR-K81SZHBVMgg=/smart/e.glbimg.com/og/ed/f/original/2015/07/27/receita-moranga-camarao-edir-nascimento-01.jpg",
+							"price": 120
+						},
+						{
+							"name": "Risoto de Camarão e Abobrinha",
+							"picture": "https://www.vaisefood.com/wp-content/uploads/2013/04/Risotto-Gamberi-e-Zucchini.jpg",
+							"price": 80
+						},
+						{
+							"name": "Bisque de Lagosta",
+							"picture": "https://idata.hiloved.com/imgs/52609fc3f8c82ff2-1024x681.jpg",
+							"price": 110
+						},
+						{
+							"name": "Acarajé",
+							"picture": "https://rodoviariaonline.com.br/wp-content/uploads/2018/10/voce-nao-pode-deixar-passar-festas-4-comidas-tipicas-de-salvador-5-640x427.jpg",
+							"price": 70
+						}
+					]
+				},
+				{
+					"category": "Drinks",
+					"dishes": [
+						{
+							"name": "Caipirinha",
+							"picture": "https://super.abril.com.br/wp-content/uploads/2017/12/caipirinha.png",
+							"price": 15
+						},
+						{
+							"name": "Mojito",
+							"picture": "https://cadareceita.com.br/wp-content/uploads/2020/08/mojito-feepik-480x270.jpg",
+							"price": 20
+						},
+						{
+							"name": "Manhattan",
+							"picture": "https://www.elhombre.com.br/wp-content/uploads/2017/03/10-things-Master-2-768x512.jpg",
+							"price": 30
+						},
+						{
+							"name": "Cosmopolitan",
+							"picture": "https://assets-prd.punchdrink.com/wp-content/uploads/2020/03/13102145/Article-Ultimate-Cosmo-Cosmopolitan-Cocktail-Recipe.jpg",
+							"price": 28
+						}
+					]
+				}
+			]
+		}
+	]
+}
