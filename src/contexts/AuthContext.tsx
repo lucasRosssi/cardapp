@@ -13,7 +13,12 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: AuthContextProps) {
-	const [user, setUser] = useState<UserDTO>({} as UserDTO);
+	const [user, setUser] = useState<UserDTO>({
+		full_name: 'Lucas Rossi',
+		first_name: 'Lucas',
+		city: 'Niterói',
+		picture: 'https://www.github.com/lucasRosssi.png',
+	} as UserDTO);
 
 	function handleUpdateUser(data: UserDTO) {
 		setUser(data);
@@ -22,12 +27,7 @@ export function AuthProvider({ children }: AuthContextProps) {
 	return (
 		<AuthContext.Provider
 			value={{
-				user: {
-					full_name: 'Lucas Rossi',
-					first_name: 'Lucas',
-					city: 'Niterói',
-					picture: 'https://www.github.com/lucasRosssi.png',
-				},
+				user,
 				handleUpdateUser,
 			}}
 		>
