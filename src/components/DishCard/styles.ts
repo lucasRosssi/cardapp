@@ -6,7 +6,9 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 
 const displayWidth = Dimensions.get('window').width - 50;
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity.attrs({
+	activeOpacity: 0.5,
+})`
 	width: ${displayWidth}px;
 	background-color: ${({ theme }) => theme.colors.shape};
 
