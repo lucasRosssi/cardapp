@@ -12,7 +12,7 @@ export const Container = styled.View`
 export const Content = styled.View`
 	flex: 1;
 	width: 100%;
-	padding: 20px 0;
+	padding-top: 20px;
 `;
 
 export const Title = styled.Text`
@@ -31,5 +31,6 @@ export const EstablishmentsList = styled(
 ).attrs({
 	contentContainerStyle: {
 		paddingHorizontal: 20,
+		paddingVertical: 20,
 	},
 })``;
