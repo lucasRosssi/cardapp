@@ -1,13 +1,13 @@
-interface DishesDTO {
-	id: string;
+interface DishDTO {
 	name: string;
-	picture: string;
 	price: number;
+	picture: string;
+	details: string;
 }
 
 interface MenuDTO {
 	category: string;
-	dishes: DishesDTO[];
+	dishes: DishDTO[];
 }
 
 interface EstablishmentDTO {
@@ -17,4 +17,4 @@ interface EstablishmentDTO {
 	menu: MenuDTO[];
 }
 
-export { DishesDTO, MenuDTO, EstablishmentDTO };
+export { DishDTO, MenuDTO, EstablishmentDTO };
