@@ -57,16 +57,20 @@ export function EstablishmentCard({
 			<Separator vertical color={theme.colors.separator} />
 
 			<RightContent>
-				<Button>
-					<AppIcon name="location" color={theme.colors.primary} size={25} />
-				</Button>
-
 				<Button onPress={handleGoToDishesMenu}>
 					<AppIcon name="food-menu" color={theme.colors.primary} size={25} />
 				</Button>
 
 				<Button>
 					<AppIcon name="gallery" color={theme.colors.primary} size={25} />
+				</Button>
+
+				<Button>
+					<AppIcon name="location" color={theme.colors.primary} size={25} />
+				</Button>
+
+				<Button>
+					<AppIcon name="star" color={theme.colors.primary} size={25} />
 				</Button>
 			</RightContent>
 		</Container>
