@@ -38,7 +38,7 @@ export function EstablishmentCard({
 
 	return (
 		<Container>
-			<LeftContent>
+			<LeftContent onPress={handleGoToDishesMenu}>
 				<Header>
 					<Name>{name}</Name>
 				</Header>

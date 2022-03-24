@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
 	width: 100%;
@@ -17,7 +17,7 @@ export const Container = styled.View`
 	elevation: 10;
 `;
 
-export const LeftContent = styled.View`
+export const LeftContent = styled(RectButton)`
 	width: 80%;
 
 	padding: 0 12px;
