@@ -9,7 +9,7 @@ import {
 	AntDesign,
 } from '@expo/vector-icons';
 
-interface AppIconProps {
+export interface AppIconProps {
 	name:
 		| 'camera'
 		| 'chevron-down'
@@ -17,11 +17,13 @@ interface AppIconProps {
 		| 'comment'
 		| 'food-menu'
 		| 'gallery'
+		| 'help'
 		| 'info'
 		| 'like-fill'
 		| 'like-outline'
 		| 'location'
 		| 'menu'
+		| 'power'
 		| 'settings'
 		| 'user';
 	size?: number;
@@ -53,6 +55,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			{name === 'gallery' && (
 				<Ionicons name="camera" size={RFValue(size)} color={color} />
 			)}
+			{name === 'help' && (
+				<MaterialIcons name="help-outline" size={RFValue(size)} color={color} />
+			)}
 			{name === 'info' && (
 				<Ionicons
 					name="md-information-circle-outline"
@@ -71,6 +76,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'menu' && (
 				<Feather name="menu" size={RFValue(size)} color={color} />
+			)}
+			{name === 'power' && (
+				<Feather name="power" size={RFValue(size)} color={color} />
 			)}
 			{name === 'settings' && (
 				<Ionicons name="settings-sharp" size={RFValue(size)} color={color} />
