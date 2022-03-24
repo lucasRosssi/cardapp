@@ -25,6 +25,7 @@ export interface AppIconProps {
 		| 'menu'
 		| 'power'
 		| 'settings'
+		| 'star'
 		| 'user';
 	size?: number;
 	color?: string;
@@ -82,6 +83,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'settings' && (
 				<Ionicons name="settings-sharp" size={RFValue(size)} color={color} />
+			)}
+			{name === 'star' && (
+				<Ionicons name="star" size={RFValue(size)} color={color} />
 			)}
 			{name === 'user' && (
 				<Feather name="user" size={RFValue(size)} color={color} />
