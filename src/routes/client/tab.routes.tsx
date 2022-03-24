@@ -6,18 +6,14 @@ import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AppIcon } from '../../components/AppIcon';
 
-import { ClientStackRoutes } from './stack.routes';
 import { MyProfile } from '../../screens/client/MyProfile';
 import { Settings } from '../../screens/client/Settings';
+import { Dashboard } from '../../screens/client/Dashboard';
 
 export type RootTabParamList = {
-	Home: undefined;
+	Dashboard: undefined;
 	MyProfile: undefined;
 	Settings: undefined;
-};
-
-export type RootStackParamList = {
-	DishesMenu: undefined;
 };
 
 const { Navigator: TabNavigator, Screen: TabScreen } =
@@ -43,8 +39,8 @@ export function ClientTabRoutes() {
 			backBehavior="history"
 		>
 			<TabScreen
-				name="Home"
-				component={ClientStackRoutes}
+				name="Dashboard"
+				component={Dashboard}
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<>
