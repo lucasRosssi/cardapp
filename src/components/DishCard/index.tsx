@@ -1,32 +1,33 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
-import { AppIcon } from '../AppIcon';
 import { Separator } from '../Separator';
 
-import {
-	Button,
-	Container,
-	Content,
-	Header,
-	Name,
-	Picture,
-	Footer,
-	InteractionButtons,
-	Price,
-} from './styles';
+import { Container, Content, Header, Name, Picture, Price } from './styles';
 
 interface DishCardProps {
 	name: string;
-	picture: string;
 	price: number;
+	picture: string;
+	details: string;
 }
 
-export function DishCard({ name, picture, price }: DishCardProps) {
+export function DishCard({ name, picture, price, details }: DishCardProps) {
 	const theme = useTheme();
+	const { navigate } = useNavigation();
+
+	function readDetails() {
+		navigate('DishDetails', {
+			name,
+			price,
+			picture,
+			details,
+		});
+	}
 
 	return (
-		<Container>
+		<Container onPress={readDetails}>
 			<Header>
 				<Name>{name}</Name>
 				<Price>R$ {price}</Price>
@@ -41,23 +42,6 @@ export function DishCard({ name, picture, price }: DishCardProps) {
 					}}
 				/>
 			</Content>
-			<Footer>
-				<InteractionButtons>
-					<Button>
-						<AppIcon
-							name="like-outline"
-							size={27}
-							color={theme.colors.primary}
-						/>
-					</Button>
-					<Button>
-						<AppIcon name="comment" size={27} color={theme.colors.primary} />
-					</Button>
-				</InteractionButtons>
-				<Button style={{ marginRight: 0 }}>
-					<AppIcon name="info" size={35} color={theme.colors.primary} />
-				</Button>
-			</Footer>
 		</Container>
 	);
 }
