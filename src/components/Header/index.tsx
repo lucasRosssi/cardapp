@@ -23,7 +23,7 @@ export function Header() {
 					<Username>{user.first_name}</Username>
 				</User>
 			)}
-			{currentScreen === 'DishesMenu' && (
+			{(currentScreen === 'DishesMenu' || currentScreen === 'DishDetails') && (
 				<BackButton onPress={goBack}>
 					<AppIcon name="chevron-left" color={theme.colors.shape} />
 				</BackButton>
