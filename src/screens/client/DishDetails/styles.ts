@@ -14,7 +14,7 @@ export const DishHeader = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
 
-	padding: 20px;
+	margin-bottom: 30px;
 `;
 
 export const Name = styled.Text`
@@ -33,6 +33,8 @@ export const ImageSlider = styled.View`
 	width: 100%;
 
 	align-items: center;
+
+	margin-bottom: 30px;
 `;
 
 export const Picture = styled.Image`

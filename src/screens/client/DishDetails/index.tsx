@@ -44,20 +44,20 @@ export function DishDetails() {
 		<>
 			<Header />
 			<Container>
-				<DishHeader>
-					<Name>{params.name}</Name>
-					<Price>R$ {formattedPrice}</Price>
-				</DishHeader>
-
-				<ImageSlider>
-					<Picture
-						source={{
-							uri: params.picture,
-						}}
-					/>
-				</ImageSlider>
-
 				<Content>
+					<DishHeader>
+						<Name>{params.name}</Name>
+						<Price>R$ {formattedPrice}</Price>
+					</DishHeader>
+
+					<ImageSlider>
+						<Picture
+							source={{
+								uri: params.picture,
+							}}
+						/>
+					</ImageSlider>
+
 					<Details>{params.details}</Details>
 				</Content>
 				<InteractionBar
