@@ -7,10 +7,6 @@ interface SettingsItem {
 
 export const settingsItems: SettingsItem[] = [
 	{
-		title: 'Ajustes',
-		icon: 'settings',
-	},
-	{
 		title: 'Ajuda',
 		icon: 'help',
 	},
