@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
 	flex: 1;
 	background-color: ${({ theme }) => theme.colors.background};
+
+	justify-content: space-between;
 `;
 
 export const DishHeader = styled.View`
@@ -50,34 +52,4 @@ export const Details = styled.Text`
 	font-size: ${RFValue(14)}px;
 	color: ${({ theme }) => theme.colors.text};
 	text-align: justify;
-`;
-
-export const Footer = styled.View`
-	position: absolute;
-	bottom: 0;
-
-	width: 100%;
-	height: ${RFValue(60)}px;
-	background-color: ${({ theme }) => theme.colors.full_light};
-
-	justify-content: center;
-
-	border-top-left-radius: ${RFValue(60)}px;
-	border-top-right-radius: ${RFValue(60)}px;
-
-	padding: 0 20px;
-
-	elevation: 10;
-`;
-
-export const InteractionButtons = styled.View`
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
-`;
-
-export const Button = styled.TouchableOpacity.attrs({
-	activeOpacity: 0.5,
-})`
-	margin-right: 20px;
 `;
