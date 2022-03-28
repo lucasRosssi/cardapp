@@ -16,7 +16,6 @@ export function Dashboard() {
 	async function fetchEstablishments() {
 		try {
 			const response = await api.get('/establishments');
-			console.log(response.data);
 			setEstablishments(response.data);
 		} catch (error) {
 			console.log(error);
@@ -34,8 +33,6 @@ export function Dashboard() {
 			<Header />
 
 			<Content>
-				<Title>Estabelecimentos</Title>
-
 				{isLoading ? (
 					<LoadingIndicator />
 				) : (
@@ -49,6 +46,7 @@ export function Dashboard() {
 								menu={item.menu}
 							/>
 						)}
+						ListHeaderComponent={<Title>Estabelecimentos</Title>}
 					/>
 				)}
 			</Content>
