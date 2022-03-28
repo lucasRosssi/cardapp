@@ -12,7 +12,6 @@ export const Container = styled.View`
 export const Content = styled.View`
 	flex: 1;
 	width: 100%;
-	padding-top: 20px;
 `;
 
 export const Title = styled.Text`
@@ -21,7 +20,6 @@ export const Title = styled.Text`
 	color: ${({ theme }) => theme.colors.title};
 
 	margin-bottom: 15px;
-	padding: 0 20px;
 `;
 
 export const EstablishmentsList = styled(
