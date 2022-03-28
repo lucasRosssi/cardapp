@@ -25,7 +25,8 @@ export const CategoryName = styled.Text`
 
 export const DishesList = styled.ScrollView.attrs({
 	horizontal: true,
-	showsHorizontalScrollIndicator: false,
+	showsHorizontalScrollIndicator: true,
+	persistentScrollbar: true,
 	contentContainerStyle: {
 		paddingHorizontal: 20,
 		paddingVertical: 20,
