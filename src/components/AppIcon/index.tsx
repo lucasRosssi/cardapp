@@ -14,6 +14,7 @@ export interface AppIconProps {
 		| 'camera'
 		| 'chevron-down'
 		| 'chevron-left'
+		| 'chevron-right'
 		| 'comment'
 		| 'food-menu'
 		| 'gallery'
@@ -23,6 +24,7 @@ export interface AppIconProps {
 		| 'like-outline'
 		| 'location'
 		| 'menu'
+		| 'plus'
 		| 'power'
 		| 'restaurant'
 		| 'send'
@@ -45,6 +47,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'chevron-left' && (
 				<Feather name="chevron-left" size={RFValue(size)} color={color} />
+			)}
+			{name === 'chevron-right' && (
+				<Feather name="chevron-right" size={RFValue(size)} color={color} />
 			)}
 			{name === 'comment' && (
 				<MaterialCommunityIcons
@@ -80,6 +85,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'menu' && (
 				<Feather name="menu" size={RFValue(size)} color={color} />
+			)}
+			{name === 'plus' && (
+				<Feather name="plus" size={RFValue(size)} color={color} />
 			)}
 			{name === 'power' && (
 				<Feather name="power" size={RFValue(size)} color={color} />
