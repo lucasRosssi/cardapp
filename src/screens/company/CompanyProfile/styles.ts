@@ -43,9 +43,9 @@ export const CameraWrapper = styled.View`
 `;
 
 export const FormWrapper = styled.View`
-	height: ${RFValue(150)}px;
+	height: ${RFValue(280)}px;
 
 	justify-content: space-between;
 
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 `;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
-import { useNavigation } from '@react-navigation/native';
 
 import * as ImagePicker from 'expo-image-picker';
 
@@ -22,14 +21,17 @@ import { AppIcon } from '../../../components/AppIcon';
 
 export function CompanyProfile() {
 	const theme = useTheme();
-	const { user, handleUpdateUser } = useAuth();
-	const { navigate } = useNavigation();
+	const { company, handleUpdateCompany } = useAuth();
 
-	const [picture, setPicture] = useState(user.picture);
-	const [fullName, setFullName] = useState(user.full_name);
-	const [fullNameError, setFullNameError] = useState('');
-	const [city, setCity] = useState(user.city);
-	const [cityError, setCityError] = useState('');
+	const [picture, setPicture] = useState(company.picture);
+	const [name, setName] = useState(company.name);
+	const [address, setAddress] = useState(company.address);
+	const [email, setEmail] = useState(company.email);
+	const [phone, setPhone] = useState(company.phone);
+	const [nameError, setNameError] = useState('');
+	const [addressError, setAddressError] = useState('');
+	const [emailError, setEmailError] = useState('');
+	const [phoneError, setPhoneError] = useState('');
 
 	const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
@@ -47,52 +49,75 @@ export function CompanyProfile() {
 
 		if (!result.cancelled) {
 			setPicture(result.uri);
-			handleUpdateUser({
-				...user,
+			handleUpdateCompany({
+				...company,
 				picture: result.uri,
 			});
 		}
 	}
 
 	function handleTypeName(value: string) {
-		setFullName(value);
-		if (fullNameError) {
-			setFullNameError('');
+		setName(value);
+		if (nameError) {
+			setNameError('');
 		}
 	}
 
-	function handleTypeCity(value: string) {
-		setCity(value);
-		if (cityError) {
-			setCityError('');
+	function handleTypeAddress(value: string) {
+		setAddress(value);
+		if (addressError) {
+			setAddressError('');
+		}
+	}
+
+	function handleTypeEmail(value: string) {
+		setEmail(value);
+		if (emailError) {
+			setEmailError('');
+		}
+	}
+
+	function handleTypePhone(value: string) {
+		setPhone(value);
+		if (phoneError) {
+			setPhoneError('');
 		}
 	}
 
 	function handleUpdateChanges() {
-		if (!fullName) {
-			setFullNameError('É necessário digitar um nome');
+		if (!name) {
+			setNameError('É necessário digitar um nome');
 		}
-		if (!city) {
-			setCityError('É necessário digitar uma cidade');
+		if (!address) {
+			setAddressError('É necessário digitar um endereço');
+		}
+		if (!email) {
+			setEmailError('É necessário digitar um email');
+		}
+		if (!phone) {
+			setPhoneError('É necessário digitar um telefone');
 		}
 
-		if (!fullName || !city) {
+		if (!name || !address || !email || !phone) {
 			return;
 		}
 
-		const formattedFullName = fullName.trim();
-		const firstName = formattedFullName.split(' ')[0];
+		const formattedName = name.trim();
+		const formattedAddress = address.trim();
+		const formattedEmail = email.trim();
+		const formattedPhone = phone.trim();
 
-		handleUpdateUser({
-			...user,
-			full_name: fullName,
-			first_name: firstName,
-			city,
+		handleUpdateCompany({
+			...company,
+			name: formattedName,
+			address: formattedAddress,
 			picture,
+			email: formattedEmail,
+			phone: formattedPhone,
 		});
-		setFullName(fullName.trim());
+		setName(name.trim());
 
-		navigate('Dashboard');
+		Alert.alert('', 'Dados salvos com sucesso!');
 	}
 
 	useEffect(() => {
@@ -133,15 +158,29 @@ export function CompanyProfile() {
 					<FormWrapper>
 						<Input
 							topPlaceholder="Nome"
-							value={fullName}
+							value={name}
 							onChangeText={handleTypeName}
-							error={fullNameError}
+							error={nameError}
 						/>
 						<Input
-							topPlaceholder="Cidade"
-							value={city}
-							onChangeText={handleTypeCity}
-							error={cityError}
+							topPlaceholder="Endereço"
+							value={address}
+							onChangeText={handleTypeAddress}
+							error={addressError}
+						/>
+						<Input
+							topPlaceholder="E-mail"
+							value={email}
+							onChangeText={handleTypeEmail}
+							error={emailError}
+							keyboardType="email-address"
+						/>
+						<Input
+							topPlaceholder="Telefone"
+							value={phone}
+							onChangeText={handleTypePhone}
+							error={phoneError}
+							keyboardType="numeric"
 						/>
 					</FormWrapper>
 
