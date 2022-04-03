@@ -24,9 +24,11 @@ export interface AppIconProps {
 		| 'location'
 		| 'menu'
 		| 'power'
+		| 'restaurant'
 		| 'send'
 		| 'settings'
 		| 'star'
+		| 'store'
 		| 'user';
 	size?: number;
 	color?: string;
@@ -82,6 +84,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			{name === 'power' && (
 				<Feather name="power" size={RFValue(size)} color={color} />
 			)}
+			{name === 'restaurant' && (
+				<Ionicons name="restaurant" size={RFValue(size)} color={color} />
+			)}
 			{name === 'send' && (
 				<Ionicons name="send-sharp" size={RFValue(size)} color={color} />
 			)}
@@ -90,6 +95,9 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'star' && (
 				<Ionicons name="star" size={RFValue(size)} color={color} />
+			)}
+			{name === 'store' && (
+				<MaterialIcons name="store" size={RFValue(size)} color={color} />
 			)}
 			{name === 'user' && (
 				<Feather name="user" size={RFValue(size)} color={color} />
