@@ -3,18 +3,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { MenuDTO, DishDTO } from '../../dtos/EstablishmentDTO';
 
-import { DishesMenu } from '../../screens/client/DishesMenu';
-import { DishDetails } from '../../screens/client/DishDetails';
+import { ClientDishesMenu } from '../../screens/client/ClientDishesMenu';
+import { ClientDishDetails } from '../../screens/client/ClientDishDetails';
 import { ClientTabRoutes } from './tab.routes';
 
-export type RootStackParamList = {
-	Home: undefined;
-	DishesMenu: { name: string; menu: MenuDTO[] };
-	DishDetails: DishDTO;
+export type ClientStackParamList = {
+	ClientHome: undefined;
+	ClientDishesMenu: { name: string; menu: MenuDTO[] };
+	ClientDishDetails: DishDTO;
 };
 
 const { Navigator: StackNavigator, Screen: StackScreen } =
-	createStackNavigator<RootStackParamList>();
+	createStackNavigator<ClientStackParamList>();
 
 export function ClientStackRoutes() {
 	return (
@@ -22,13 +22,13 @@ export function ClientStackRoutes() {
 			screenOptions={{
 				headerShown: false,
 			}}
-			initialRouteName="Home"
+			initialRouteName="ClientHome"
 		>
-			<StackScreen name="Home" component={ClientTabRoutes} />
+			<StackScreen name="ClientHome" component={ClientTabRoutes} />
 
-			<StackScreen name="DishesMenu" component={DishesMenu} />
+			<StackScreen name="ClientDishesMenu" component={ClientDishesMenu} />
 
-			<StackScreen name="DishDetails" component={DishDetails} />
+			<StackScreen name="ClientDishDetails" component={ClientDishDetails} />
 		</StackNavigator>
 	);
 }

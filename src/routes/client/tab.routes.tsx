@@ -6,18 +6,18 @@ import { useTheme } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AppIcon } from '../../components/AppIcon';
 
-import { MyProfile } from '../../screens/client/MyProfile';
-import { Settings } from '../../screens/client/Settings';
-import { Dashboard } from '../../screens/client/Dashboard';
+import { ClientProfile } from '../../screens/client/ClientProfile';
+import { ClientSettings } from '../../screens/client/ClientSettings';
+import { ClientDashboard } from '../../screens/client/ClientDashboard';
 
-export type RootTabParamList = {
-	Dashboard: undefined;
-	MyProfile: undefined;
-	Settings: undefined;
+export type ClientTabParamList = {
+	ClientDashboard: undefined;
+	ClientProfile: undefined;
+	ClientSettings: undefined;
 };
 
 const { Navigator: TabNavigator, Screen: TabScreen } =
-	createBottomTabNavigator<RootTabParamList>();
+	createBottomTabNavigator<ClientTabParamList>();
 
 export function ClientTabRoutes() {
 	const theme = useTheme();
@@ -39,8 +39,8 @@ export function ClientTabRoutes() {
 			backBehavior="history"
 		>
 			<TabScreen
-				name="Dashboard"
-				component={Dashboard}
+				name="ClientDashboard"
+				component={ClientDashboard}
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<>
@@ -62,8 +62,8 @@ export function ClientTabRoutes() {
 				}}
 			/>
 			<TabScreen
-				name="MyProfile"
-				component={MyProfile}
+				name="ClientProfile"
+				component={ClientProfile}
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<>
@@ -85,8 +85,8 @@ export function ClientTabRoutes() {
 				}}
 			/>
 			<TabScreen
-				name="Settings"
-				component={Settings}
+				name="ClientSettings"
+				component={ClientSettings}
 				options={{
 					tabBarIcon: ({ color, focused }) => (
 						<>
