@@ -45,6 +45,26 @@ export const Username = styled.Text`
 	color: ${({ theme }) => theme.colors.shape};
 `;
 
+export const Company = styled.View`
+	flex-direction: row;
+	align-items: center;
+`;
+
+export const CompanyPicture = styled.Image`
+	width: ${RFValue(50)}px;
+	height: ${RFValue(50)}px;
+
+	border-radius: ${RFValue(25)}px;
+
+	margin-right: 10px;
+`;
+
+export const CompanyName = styled.Text`
+	font-family: ${({ theme }) => theme.fonts.secondary_bold};
+	font-size: ${RFValue(20)}px;
+	color: ${({ theme }) => theme.colors.shape};
+`;
+
 export const BackButton = styled(BorderlessButton)`
 	align-items: center;
 	justify-content: center;

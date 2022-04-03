@@ -4,26 +4,43 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { AppIcon } from '../AppIcon';
 
-import { Container, User, Picture, Username, Logo, BackButton } from './styles';
+import {
+	Container,
+	User,
+	Picture,
+	Username,
+	Company,
+	CompanyPicture,
+	CompanyName,
+	Logo,
+	BackButton,
+} from './styles';
 import { useAuth } from '../../hooks/useAuth';
 
 export function Header() {
 	const theme = useTheme();
 	const route = useRoute();
 	const { goBack } = useNavigation();
-	const { user } = useAuth();
+	const { user, company } = useAuth();
 
 	const currentScreen = route.name as keyof ReactNavigation.RootParamList;
 
 	return (
 		<Container>
-			{currentScreen === 'Dashboard' && (
+			{currentScreen === 'ClientDashboard' && (
 				<User>
 					<Picture source={{ uri: user.picture }} />
-					<Username>{user.first_name}</Username>
+					<Username testID="user-name">{user.first_name}</Username>
 				</User>
 			)}
-			{(currentScreen === 'DishesMenu' || currentScreen === 'DishDetails') && (
+			{currentScreen === 'CompanyDashboard' && (
+				<Company>
+					<CompanyPicture source={{ uri: company.picture }} />
+					<CompanyName>{company.name}</CompanyName>
+				</Company>
+			)}
+			{(currentScreen === 'ClientDishesMenu' ||
+				currentScreen === 'ClientDishDetails') && (
 				<BackButton onPress={goBack}>
 					<AppIcon name="chevron-left" color={theme.colors.shape} />
 				</BackButton>
