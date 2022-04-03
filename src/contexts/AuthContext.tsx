@@ -25,13 +25,11 @@ export function AuthProvider({ children }: AuthContextProps) {
 	const [company, setCompany] = useState<EstablishmentDTO>({
 		id: '2',
 		name: 'The Cruise Bar',
-		address: '',
+		address: 'Rua da Atlântida, 234',
 		picture:
 			'https://galeriemagazine.com/wp-content/uploads/2020/01/MAIN_BG_Goodman_Environmental_Hero_0007_RT-1920x1200.jpg',
-		contact: {
-			email: 'thecruisebar@bar.com',
-			phone: '2124246969',
-		},
+		email: 'thecruisebar@bar.com',
+		phone: '2124246969',
 		menu: [],
 	} as EstablishmentDTO);
 

@@ -6,6 +6,7 @@ interface DishDTO {
 }
 
 interface MenuDTO {
+	id: string;
 	category: string;
 	dishes: DishDTO[];
 }
@@ -15,10 +16,8 @@ interface EstablishmentDTO {
 	name: string;
 	address: string;
 	picture: string;
-	contact: {
-		email: string;
-		phone: string;
-	};
+	email: string;
+	phone: string;
 	menu: MenuDTO[];
 }
 
