@@ -9,7 +9,7 @@ import { EstablishmentDTO } from '../../../dtos/EstablishmentDTO';
 
 import { Container, Content, EstablishmentsList, Title } from './styles';
 
-export function Dashboard() {
+export function ClientDashboard() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [establishments, setEstablishments] = useState<EstablishmentDTO[]>([]);
 

@@ -6,7 +6,7 @@ import { settingsItems } from '../../../data/lists';
 
 import { Container, SettingsList } from './styles';
 
-export function Settings() {
+export function ClientSettings() {
 	const item_list = settingsItems.map(({ title, icon }) => (
 		<SettingsItem key={title} title={title} icon={icon} />
 	));

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigation } from '@react-navigation/native';
@@ -20,7 +20,7 @@ import {
 } from './styles';
 import { AppIcon } from '../../../components/AppIcon';
 
-export function MyProfile() {
+export function ClientProfile() {
 	const theme = useTheme();
 	const { user, handleUpdateUser } = useAuth();
 	const { navigate } = useNavigation();
@@ -92,7 +92,7 @@ export function MyProfile() {
 		});
 		setFullName(fullName.trim());
 
-		navigate('Dashboard');
+		Alert.alert('', 'Dados salvos com sucesso!');
 	}
 
 	useEffect(() => {

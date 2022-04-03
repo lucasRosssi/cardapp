@@ -18,13 +18,13 @@ import {
 	Details,
 } from './styles';
 
-export function DishDetails() {
+export function ClientDishDetails() {
 	const route = useRoute();
 
 	const [isVisible, setIsVisible] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 
-	const params = route.params as RootStackParamList['DishDetails'];
+	const params = route.params as RootStackParamList['ClientDishDetails'];
 
 	const formattedPrice = params.price.toFixed(2).replace('.', ',');
 

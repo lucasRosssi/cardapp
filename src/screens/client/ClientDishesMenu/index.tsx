@@ -8,10 +8,10 @@ import { Container, Content, Title, Categories } from './styles';
 
 import { RootStackParamList } from '../../../routes/client/stack.routes';
 
-export function DishesMenu() {
+export function ClientDishesMenu() {
 	const route = useRoute();
 
-	const { name, menu } = route.params as RootStackParamList['DishesMenu'];
+	const { name, menu } = route.params as RootStackParamList['ClientDishesMenu'];
 
 	const categories_dishes = menu.map(({ category, dishes }) => (
 		<CategoryDishes key={category} category={category} dishes={dishes} />
