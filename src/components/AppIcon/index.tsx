@@ -31,7 +31,8 @@ export interface AppIconProps {
 		| 'settings'
 		| 'star'
 		| 'store'
-		| 'user';
+		| 'user'
+		| 'x';
 	size?: number;
 	color?: string;
 }
@@ -110,6 +111,7 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			{name === 'user' && (
 				<Feather name="user" size={RFValue(size)} color={color} />
 			)}
+			{name === 'x' && <Feather name="x" size={RFValue(size)} color={color} />}
 		</>
 	);
 }
