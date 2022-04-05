@@ -4,6 +4,7 @@ import { useTheme } from 'styled-components';
 import { AppIcon } from '../../../components/AppIcon';
 import { Category } from '../../../components/Category';
 import { Header } from '../../../components/Header';
+import { NewCategoryModal } from '../../../components/NewCategoryModal';
 import { MenuDTO } from '../../../dtos/EstablishmentDTO';
 import { useAuth } from '../../../hooks/useAuth';
 import { api } from '../../../services/api';
@@ -14,16 +15,49 @@ export function CompanyDashboard() {
 	const theme = useTheme();
 	const { company } = useAuth();
 
+	const [isVisible, setIsVisible] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isInputLoading, setIsInputLoading] = useState(false);
 	const [categories, setCategories] = useState<MenuDTO[]>([]);
 
-	async function fetchCategories() {
-		const response = await api.get(`/establishments/${company.id}`);
-		setCategories(response.data.menu);
-		setIsLoading(false);
+	function handleCloseModal() {
+		setIsVisible(false);
+	}
+
+	function handleAddNewCategory() {
+		setIsVisible(true);
+	}
+
+	async function handleCreateNewCategory(category: string) {
+		setIsInputLoading(true);
+
+		const menu = company.menu;
+		console.log(menu);
+
+		const data = {
+			id: String(menu.length + 1),
+			category,
+			dishes: [],
+		};
+
+		menu.push(data);
+
+		await api.put(`/establishments/${company.id}`, {
+			...company,
+			menu,
+		});
+
+		setIsInputLoading(false);
+		setCategories(menu);
 	}
 
 	useEffect(() => {
+		async function fetchCategories() {
+			const response = await api.get(`/establishments/${company.id}`);
+			setCategories(response.data.menu);
+			setIsLoading(false);
+		}
+
 		fetchCategories();
 	}, []);
 
@@ -51,9 +85,16 @@ export function CompanyDashboard() {
 				/>
 			)}
 
-			<AddCategoryButton>
+			<AddCategoryButton onPress={handleAddNewCategory}>
 				<AppIcon name="plus" color={theme.colors.primary} />
 			</AddCategoryButton>
+
+			<NewCategoryModal
+				isVisible={isVisible}
+				closeModal={handleCloseModal}
+				isLoading={isInputLoading}
+				addCategory={handleCreateNewCategory}
+			/>
 		</Container>
 	);
 }
