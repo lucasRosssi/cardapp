@@ -18,7 +18,7 @@ export function DishCard({ name, picture, price, details }: DishCardProps) {
 	const { navigate } = useNavigation();
 
 	function readDetails() {
-		navigate('DishDetails', {
+		navigate('ClientDishDetails', {
 			name,
 			price,
 			picture,
@@ -27,7 +27,7 @@ export function DishCard({ name, picture, price, details }: DishCardProps) {
 	}
 
 	return (
-		<Container onPress={readDetails}>
+		<Container testID="card-dish" onPress={readDetails}>
 			<Header>
 				<Name>{name}</Name>
 				<Price>R$ {price}</Price>

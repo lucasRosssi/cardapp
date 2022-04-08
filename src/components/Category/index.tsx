@@ -20,7 +20,7 @@ export function Category({ id, category, dishes }: CategoryProps) {
 
 	return (
 		<Container onPress={handleChooseCategory}>
-			<Title>{category}</Title>
+			<Title testID="category">{category}</Title>
 			<AppIcon name="chevron-right" color={theme.colors.primary} />
 		</Container>
 	);

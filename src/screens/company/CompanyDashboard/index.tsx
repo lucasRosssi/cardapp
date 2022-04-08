@@ -31,24 +31,20 @@ export function CompanyDashboard() {
 	async function handleCreateNewCategory(category: string) {
 		setIsInputLoading(true);
 
-		const menu = company.menu;
-		console.log(menu);
-
 		const data = {
-			id: String(menu.length + 1),
+			id: String(categories.length + 1),
 			category,
 			dishes: [],
 		};
 
-		menu.push(data);
+		setCategories([...categories, data]);
 
 		await api.put(`/establishments/${company.id}`, {
 			...company,
-			menu,
+			menu: [...categories, data],
 		});
 
 		setIsInputLoading(false);
-		setCategories(menu);
 	}
 
 	useEffect(() => {
@@ -85,11 +81,12 @@ export function CompanyDashboard() {
 				/>
 			)}
 
-			<AddCategoryButton onPress={handleAddNewCategory}>
+			<AddCategoryButton testID="button-add" onPress={handleAddNewCategory}>
 				<AppIcon name="plus" color={theme.colors.primary} />
 			</AddCategoryButton>
 
 			<NewCategoryModal
+				testID="modal-add-category"
 				isVisible={isVisible}
 				closeModal={handleCloseModal}
 				isLoading={isInputLoading}

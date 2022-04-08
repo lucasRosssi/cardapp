@@ -5,7 +5,7 @@ import { Header } from '../../../components/Header';
 import { InteractionBar } from '../../../components/InteractionBar';
 import { CommentsModal } from '../../../components/CommentsModal';
 
-import { RootStackParamList } from '../../../routes/client/stack.routes';
+import { ClientStackParamList } from '../../../routes/client/stack.routes';
 
 import {
 	Container,
@@ -24,7 +24,7 @@ export function ClientDishDetails() {
 	const [isVisible, setIsVisible] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 
-	const params = route.params as RootStackParamList['ClientDishDetails'];
+	const params = route.params as ClientStackParamList['ClientDishDetails'];
 
 	const formattedPrice = params.price.toFixed(2).replace('.', ',');
 
@@ -58,7 +58,7 @@ export function ClientDishDetails() {
 						/>
 					</ImageSlider>
 
-					<Details>{params.details}</Details>
+					<Details testID="details-dish">{params.details}</Details>
 				</Content>
 				<InteractionBar
 					likeOnPress={handleLike}

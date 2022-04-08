@@ -11,6 +11,7 @@ import { CloseButton, Container, Title } from './styles';
 import { AppIcon } from '../AppIcon';
 
 interface ModalProps {
+	testID: string;
 	isVisible: boolean;
 	closeModal: () => void;
 	isLoading: boolean;
@@ -28,6 +29,7 @@ const schema = Yup.object().shape({
 });
 
 export function NewCategoryModal({
+	testID,
 	isVisible,
 	closeModal,
 	isLoading,
@@ -55,13 +57,14 @@ export function NewCategoryModal({
 			onBackdropPress={closeModal}
 			onBackButtonPress={closeModal}
 		>
-			<Container>
+			<Container testID={testID}>
 				<CloseButton onPress={closeModal}>
 					<AppIcon name="x" color={theme.colors.primary} size={25} />
 				</CloseButton>
 				<Title>Nova categoria</Title>
 
 				<AppInput
+					testID="modal-input"
 					name="category"
 					control={control}
 					error={errors.category && errors.category.message}

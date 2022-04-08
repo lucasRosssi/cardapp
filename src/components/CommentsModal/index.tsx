@@ -52,9 +52,12 @@ export function CommentsModal({
 				<CommentsWrapper></CommentsWrapper>
 
 				<CommentInput>
-					<Input placeholder="Escreva um comentário..." />
+					<Input
+						testID="input-comment"
+						placeholder="Escreva um comentário..."
+					/>
 
-					<SendButton>
+					<SendButton testID="button-send">
 						<AppIcon name="send" color={theme.colors.full_light} size={20} />
 					</SendButton>
 				</CommentInput>

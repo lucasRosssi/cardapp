@@ -38,7 +38,7 @@ export function AppInput({
 				)}
 			/>
 			{button && (
-				<Button onPress={onButtonPress}>
+				<Button testID="input-button" onPress={onButtonPress}>
 					{isLoading ? (
 						<ActivityIndicator color={theme.colors.full_light} size={30} />
 					) : (

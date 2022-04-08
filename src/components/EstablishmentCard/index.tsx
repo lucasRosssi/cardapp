@@ -33,12 +33,12 @@ export function EstablishmentCard({
 	const { navigate } = useNavigation();
 
 	function handleGoToDishesMenu() {
-		navigate('DishesMenu', { name, menu });
+		navigate('ClientDishesMenu', { name, menu });
 	}
 
 	return (
 		<Container>
-			<LeftContent onPress={handleGoToDishesMenu}>
+			<LeftContent testID="button-establishment" onPress={handleGoToDishesMenu}>
 				<Header>
 					<Name>{name}</Name>
 				</Header>
