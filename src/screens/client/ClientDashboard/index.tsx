@@ -10,6 +10,7 @@ import { EstablishmentDTO } from '../../../dtos/EstablishmentDTO';
 import { Container, Content, EstablishmentsList, Title } from './styles';
 
 export function ClientDashboard() {
+	const [isMounted, setIsMounted] = useState(true);
 	const [isLoading, setIsLoading] = useState(true);
 	const [establishments, setEstablishments] = useState<EstablishmentDTO[]>([]);
 
@@ -18,14 +19,18 @@ export function ClientDashboard() {
 			const response = await api.get('/establishments');
 			setEstablishments(response.data);
 		} catch (error) {
-			console.log(error);
+			throw new Error('### Oh no... ###');
 		} finally {
 			setIsLoading(false);
 		}
 	}
 
 	useEffect(() => {
-		fetchEstablishments();
+		if (isMounted) {
+			fetchEstablishments();
+		}
+
+		return () => setIsMounted(false);
 	}, []);
 
 	return (
@@ -37,6 +42,7 @@ export function ClientDashboard() {
 					<LoadingIndicator />
 				) : (
 					<EstablishmentsList
+						testID="establishment-card"
 						data={establishments}
 						keyExtractor={(item) => item.id}
 						renderItem={({ item }) => (
