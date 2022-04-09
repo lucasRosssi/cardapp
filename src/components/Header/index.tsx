@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { AppIcon } from '../AppIcon';
@@ -26,9 +26,9 @@ export function Header() {
 	const currentScreen = route.name as keyof ReactNavigation.RootParamList;
 
 	return (
-		<Container>
+		<Container testID="header">
 			{currentScreen === 'ClientDashboard' && (
-				<User>
+				<User testID="user-info">
 					<Picture source={{ uri: user.picture }} />
 					<Username testID="user-name">{user.first_name}</Username>
 				</User>
@@ -41,7 +41,7 @@ export function Header() {
 			)}
 			{(currentScreen === 'ClientDishesMenu' ||
 				currentScreen === 'ClientDishDetails') && (
-				<BackButton onPress={goBack}>
+				<BackButton testID="back-button" onPress={goBack}>
 					<AppIcon name="chevron-left" color={theme.colors.shape} />
 				</BackButton>
 			)}
