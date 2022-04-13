@@ -17,6 +17,7 @@ export const AuthContext = createContext({} as IAuthContextData);
 
 export function AuthProvider({ children }: AuthContextProps) {
 	const [user, setUser] = useState<UserDTO>({
+		id: '1',
 		full_name: 'Lucas Rossi',
 		first_name: 'Lucas',
 		city: 'Niterói',
