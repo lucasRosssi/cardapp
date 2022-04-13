@@ -1,16 +1,17 @@
 import React from 'react';
-import { TextInputProps } from 'react-native';
+import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 
 import { Container, Placeholder, TextInput, Error } from './styles';
 
 interface InputProps extends TextInputProps {
 	topPlaceholder: string;
 	error?: string;
+	style?: StyleProp<ViewStyle>;
 }
 
-export function Input({ topPlaceholder, error, ...rest }: InputProps) {
+export function Input({ topPlaceholder, error, style, ...rest }: InputProps) {
 	return (
-		<Container>
+		<Container style={style}>
 			<Placeholder>{topPlaceholder}</Placeholder>
 			<TextInput {...rest} />
 
