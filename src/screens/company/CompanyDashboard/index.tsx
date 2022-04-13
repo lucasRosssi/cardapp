@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../../hooks/useAuth';
+
+import { api } from '../../../services/api';
+import { MenuDTO } from '../../../dtos/EstablishmentDTO';
+
 import { AppIcon } from '../../../components/AppIcon';
 import { Category } from '../../../components/Category';
 import { Header } from '../../../components/Header';
 import { NewCategoryModal } from '../../../components/NewCategoryModal';
-import { MenuDTO } from '../../../dtos/EstablishmentDTO';
-import { useAuth } from '../../../hooks/useAuth';
-import { api } from '../../../services/api';
 
 import { Container, CategoriesList, AddCategoryButton, Title } from './styles';
 
 export function CompanyDashboard() {
 	const theme = useTheme();
 	const { company } = useAuth();
+	const { navigate } = useNavigation();
 
 	const [isVisible, setIsVisible] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +30,10 @@ export function CompanyDashboard() {
 
 	function handleAddNewCategory() {
 		setIsVisible(true);
+	}
+
+	function handleGoToCategory() {
+		navigate('CompanyCategoryMenu');
 	}
 
 	async function handleCreateNewCategory(category: string) {
@@ -73,6 +81,7 @@ export function CompanyDashboard() {
 					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (
 						<Category
+							onPress={handleGoToCategory}
 							id={item.id}
 							category={item.category}
 							dishes={item.dishes}
