@@ -21,7 +21,7 @@ export const Container = styled.View`
 
 export const Logo = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
-	font-size: ${RFValue(30)}px;
+	font-size: ${RFValue(25)}px;
 	color: ${({ theme }) => theme.colors.shape};
 `;
 

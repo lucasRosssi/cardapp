@@ -40,13 +40,15 @@ export function Header() {
 				</Company>
 			)}
 			{(currentScreen === 'ClientDishesMenu' ||
-				currentScreen === 'ClientDishDetails') && (
+				currentScreen === 'ClientDishDetails' ||
+				currentScreen === 'CompanyDishDetails' ||
+				currentScreen === 'CompanyCategoryMenu') && (
 				<BackButton testID="back-button" onPress={goBack}>
 					<AppIcon name="chevron-left" color={theme.colors.shape} />
 				</BackButton>
 			)}
 
-			<Logo>Cardapp</Logo>
+			<Logo>MyCardapp</Logo>
 		</Container>
 	);
 }
