@@ -10,16 +10,14 @@ interface CategoryProps {
 	id: string;
 	category: string;
 	dishes: DishDTO[];
+	onPress: () => void;
 }
 
-export function Category({ id, category, dishes }: CategoryProps) {
+export function Category({ id, category, dishes, onPress }: CategoryProps) {
 	const theme = useTheme();
-	const { navigate } = useNavigation();
-
-	function handleChooseCategory() {}
 
 	return (
-		<Container onPress={handleChooseCategory}>
+		<Container onPress={onPress}>
 			<Title testID="category">{category}</Title>
 			<AppIcon name="chevron-right" color={theme.colors.primary} />
 		</Container>
