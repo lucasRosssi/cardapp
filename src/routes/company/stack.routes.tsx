@@ -1,14 +1,16 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { MenuDTO, DishDTO } from '../../dtos/EstablishmentDTO';
+import { DishDTO } from '../../dtos/EstablishmentDTO';
 
 import { CompanyTabRoutes } from './tab.routes';
+import { CompanyCategoryMenu } from '../../screens/company/CompanyCategoryMenu';
+import { CompanyDishDetails } from '../../screens/company/CompanyDishDetails';
 
 export type CompanyStackParamList = {
-	Home: undefined;
-	DishesMenu: { name: string; menu: MenuDTO[] };
-	DishDetails: DishDTO;
+	CompanyTabRoutes: undefined;
+	CompanyCategoryMenu: undefined;
+	CompanyDishDetails: DishDTO | undefined;
 };
 
 const { Navigator: StackNavigator, Screen: StackScreen } =
@@ -20,9 +22,11 @@ export function CompanyStackRoutes() {
 			screenOptions={{
 				headerShown: false,
 			}}
-			initialRouteName="Home"
+			initialRouteName="CompanyTabRoutes"
 		>
-			<StackScreen name="Home" component={CompanyTabRoutes} />
+			<StackScreen name="CompanyTabRoutes" component={CompanyTabRoutes} />
+			<StackScreen name="CompanyCategoryMenu" component={CompanyCategoryMenu} />
+			<StackScreen name="CompanyDishDetails" component={CompanyDishDetails} />
 		</StackNavigator>
 	);
 }
