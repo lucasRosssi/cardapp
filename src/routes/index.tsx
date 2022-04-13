@@ -7,7 +7,7 @@ import { CompanyStackRoutes } from './company/stack.routes';
 export function Routes() {
 	return (
 		<NavigationContainer>
-			<CompanyStackRoutes />
+			<ClientStackRoutes />
 		</NavigationContainer>
 	);
 }
