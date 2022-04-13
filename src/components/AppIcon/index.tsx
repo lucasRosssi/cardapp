@@ -26,6 +26,7 @@ export interface AppIconProps {
 		| 'menu'
 		| 'plus'
 		| 'power'
+		| 'random-food'
 		| 'restaurant'
 		| 'send'
 		| 'settings'
@@ -92,6 +93,13 @@ export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
 			)}
 			{name === 'power' && (
 				<Feather name="power" size={RFValue(size)} color={color} />
+			)}
+			{name === 'random-food' && (
+				<MaterialCommunityIcons
+					name="food-fork-drink"
+					size={RFValue(size)}
+					color={color}
+				/>
 			)}
 			{name === 'restaurant' && (
 				<Ionicons name="restaurant" size={RFValue(size)} color={color} />
