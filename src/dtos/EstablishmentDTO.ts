@@ -3,6 +3,7 @@ interface DishDTO {
 	price: number;
 	picture: string;
 	details: string;
+	like_count: number;
 }
 
 interface MenuDTO {
