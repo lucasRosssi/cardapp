@@ -2,68 +2,64 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Dimensions } from 'react-native';
 
-import { BorderlessButton } from 'react-native-gesture-handler';
-
 const displayWidth = Dimensions.get('window').width - 50;
 
 export const Container = styled.TouchableOpacity.attrs({
 	activeOpacity: 0.5,
 })`
 	width: ${displayWidth}px;
-	background-color: ${({ theme }) => theme.colors.shape};
+	background-color: ${({ theme }) => theme.colors.full_light};
+
+	flex-direction: row;
 
 	border-radius: 20px;
 
 	padding: 12px;
-	margin: 0 25px;
+	margin-bottom: 20px;
 
 	elevation: 10;
 `;
 
-export const Header = styled.View`
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+export const Picture = styled.Image`
+	width: ${RFValue(100)}px;
+	height: ${RFValue(100)}px;
 
-	margin-bottom: 10px;
-`;
+	border-radius: 10px;
 
-export const Name = styled.Text`
-	font-family: ${({ theme }) => theme.fonts.primary_bold};
-	font-size: ${RFValue(14)}px;
-	color: ${({ theme }) => theme.colors.primary};
-`;
-
-export const Price = styled.Text`
-	font-family: ${({ theme }) => theme.fonts.primary_bold};
-	font-size: ${RFValue(15)}px;
-	color: ${({ theme }) => theme.colors.primary};
+	margin: -5px 12px -5px -5px;
 `;
 
 export const Content = styled.View`
-	margin-top: 15px;
+	flex: 1
+
+	margin-left: 12px;
+
 `;
 
-export const Picture = styled.Image`
-	width: 100%;
-	height: ${RFValue(220)}px;
-
-	border-radius: 10px;
+export const Name = styled.Text`
+	font-family: ${({ theme }) => theme.fonts.primary};
+	font-size: ${RFValue(14)}px;
+	color: ${({ theme }) => theme.colors.secondary};
 `;
 
-export const Button = styled(BorderlessButton)`
-	margin-right: 10px;
+export const Price = styled.Text`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	font-family: ${({ theme }) => theme.fonts.primary_bold};
+	font-size: ${RFValue(15)}px;
+	color: ${({ theme }) => theme.colors.secondary};
+
+	line-height: ${RFValue(18)}px;
 `;
 
-export const Footer = styled.View`
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
+export const Likes = styled.Text`
+	position: absolute;
+	bottom: 0;
+	right: 5px;
 
-	padding: 5px;
-	margin-top: 7px;
-`;
-
-export const InteractionButtons = styled.View`
-	flex-direction: row;
+	font-family: ${({ theme }) => theme.fonts.secondary_bold};
+	font-size: ${RFValue(13)}px;
+	color: ${({ theme }) => theme.colors.primary};
 `;

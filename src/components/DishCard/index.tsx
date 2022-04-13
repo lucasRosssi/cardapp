@@ -4,43 +4,69 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Separator } from '../Separator';
 
-import { Container, Content, Header, Name, Picture, Price } from './styles';
+import { Container, Content, Likes, Name, Picture, Price } from './styles';
+import { useAuth } from '../../hooks/useAuth';
+import { AppIcon } from '../AppIcon';
 
 interface DishCardProps {
 	name: string;
 	price: number;
 	picture: string;
 	details: string;
+	like_count: number;
 }
 
-export function DishCard({ name, picture, price, details }: DishCardProps) {
+export function DishCard({
+	name,
+	picture,
+	price,
+	details,
+	like_count,
+}: DishCardProps) {
 	const theme = useTheme();
 	const { navigate } = useNavigation();
+	const { user, company } = useAuth();
 
 	function readDetails() {
-		navigate('ClientDishDetails', {
-			name,
-			price,
-			picture,
-			details,
-		});
+		if (user.id) {
+			navigate('ClientDishDetails', {
+				name,
+				price,
+				picture,
+				details,
+				like_count,
+			});
+		}
+
+		/*if (company.id) {
+			navigate('CompanyDishDetails', {
+				name,
+				price,
+				picture,
+				details,
+			});
+		}*/
 	}
 
 	return (
 		<Container testID="card-dish" onPress={readDetails}>
-			<Header>
-				<Name>{name}</Name>
-				<Price>R$ {price}</Price>
-			</Header>
+			<Picture
+				source={{
+					uri: picture,
+				}}
+			/>
 
-			<Separator color={theme.colors.separator} />
+			<Separator vertical color={theme.colors.separator} />
 
 			<Content>
-				<Picture
-					source={{
-						uri: picture,
-					}}
-				/>
+				<Name>{name}</Name>
+
+				<Price>R$ 20,00</Price>
+
+				<Likes>
+					<AppIcon name="like-fill" color={theme.colors.primary} size={10} />{' '}
+					{like_count}
+				</Likes>
 			</Content>
 		</Container>
 	);
