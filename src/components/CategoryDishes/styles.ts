@@ -1,5 +1,7 @@
+import { FlatList, FlatListProps } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import { DishDTO } from '../../dtos/EstablishmentDTO';
 
 export const Container = styled.View``;
 
@@ -23,10 +25,9 @@ export const CategoryName = styled.Text`
 	margin-top: 5px;
 `;
 
-export const DishesList = styled.ScrollView.attrs({
-	horizontal: true,
-	showsHorizontalScrollIndicator: true,
-	persistentScrollbar: true,
+export const DishesList = styled(
+	FlatList as new (props: FlatListProps<DishDTO>) => FlatList<DishDTO>
+).attrs({
 	contentContainerStyle: {
 		paddingHorizontal: 20,
 		paddingVertical: 20,

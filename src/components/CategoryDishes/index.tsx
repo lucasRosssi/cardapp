@@ -15,16 +15,6 @@ interface CategoryDishesProps {
 export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 	const theme = useTheme();
 
-	const dishes_list = dishes.map(({ name, picture, price, details }) => (
-		<DishCard
-			key={name}
-			name={name}
-			picture={picture}
-			price={price}
-			details={details}
-		/>
-	));
-
 	return (
 		<Container>
 			<CategoryWrapper>
@@ -32,7 +22,19 @@ export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 
 				<CategoryName>{category}</CategoryName>
 			</CategoryWrapper>
-			<DishesList>{dishes_list}</DishesList>
+			<DishesList
+				data={dishes}
+				keyExtractor={(item) => item.name}
+				renderItem={({ item }) => (
+					<DishCard
+						name={item.name}
+						picture={item.picture}
+						price={item.price}
+						details={item.details}
+						like_count={item.like_count}
+					/>
+				)}
+			/>
 		</Container>
 	);
 }
