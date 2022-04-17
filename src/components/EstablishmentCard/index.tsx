@@ -43,8 +43,6 @@ export function EstablishmentCard({
 					<Name>{name}</Name>
 				</Header>
 
-				<Separator color={theme.colors.separator} />
-
 				<Content>
 					<Picture
 						source={{

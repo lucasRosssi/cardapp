@@ -27,8 +27,6 @@ export const Header = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-
-	margin-bottom: 10px;
 `;
 
 export const Name = styled.Text`
@@ -38,7 +36,7 @@ export const Name = styled.Text`
 `;
 
 export const Content = styled.View`
-	margin-top: 15px;
+	margin-top: 5px;
 `;
 
 export const Picture = styled.Image`
@@ -52,8 +50,6 @@ export const RightContent = styled.View`
 	width: 20%;
 
 	align-items: center;
-
-	padding: 0 12px;
 `;
 
 export const Button = styled(BorderlessButton)`
