@@ -1,12 +1,12 @@
 export default {
 	colors: {
-		background: '#EEEEEE',
+		background: '#F5F5F5',
 		full_light: '#FFFFFF',
 		item_inactive: '#AAAAAA',
 		primary: '#59B7FF',
 		primary_light: '#ADF0FF',
 		secondary: '#454545',
-		shape: '#F5F5F5',
+		shape: '#F7F7F7',
 		success: '#5CD65A',
 		attention: '#E62929',
 		separator: '#D4D4D4',
