@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
+
+import { api } from '../../../services/api';
 
 import { Header } from '../../../components/Header';
 import { InteractionBar } from '../../../components/InteractionBar';
@@ -18,11 +20,21 @@ import {
 	Details,
 } from './styles';
 
+interface CommentProps {
+	id: string;
+	user: {
+		name: string;
+		picture: string;
+	};
+	content: string;
+}
+
 export function ClientDishDetails() {
 	const route = useRoute();
 
 	const [isVisible, setIsVisible] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
+	const [comments, setComments] = useState<CommentProps[]>([]);
 
 	const params = route.params as ClientStackParamList['ClientDishDetails'];
 
@@ -39,6 +51,17 @@ export function ClientDishDetails() {
 	function handleLike() {
 		setIsLiked(!isLiked);
 	}
+
+	useEffect(() => {
+		async function fetchComments() {
+			const response = await api.get(`dishes/${params.id}`);
+
+			setComments(response.data.comments);
+			console.log(response.data);
+		}
+
+		fetchComments();
+	}, []);
 
 	return (
 		<>
@@ -60,11 +83,13 @@ export function ClientDishDetails() {
 
 					<Details testID="details-dish">{params.details}</Details>
 				</Content>
-				<InteractionBar
-					likeOnPress={handleLike}
-					commentOnPress={handleCommentsOnPress}
-					isLiked={isLiked}
-				/>
+				{!isVisible && (
+					<InteractionBar
+						likeOnPress={handleLike}
+						commentOnPress={handleCommentsOnPress}
+						isLiked={isLiked}
+					/>
+				)}
 			</Container>
 
 			<CommentsModal
@@ -72,6 +97,7 @@ export function ClientDishDetails() {
 				closeModal={handleCloseModal}
 				isLiked={isLiked}
 				handleLike={handleLike}
+				comments={comments}
 			/>
 		</>
 	);
