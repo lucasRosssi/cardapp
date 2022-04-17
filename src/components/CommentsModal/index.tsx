@@ -1,17 +1,23 @@
 import React from 'react';
+import { View } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTheme } from 'styled-components';
+import { CommentDTO } from '../../dtos/CommentDTO';
+import { useAuth } from '../../hooks/useAuth';
 
 import { AppIcon } from '../AppIcon';
+import { Comment } from '../Comment';
 import { InteractionBar } from '../InteractionBar';
 
 import {
 	Container,
 	SwipeableIndicator,
-	CommentsWrapper,
+	CommentsList,
 	CommentInput,
 	Input,
 	SendButton,
+	UserPicture,
+	CommentsWrapper,
 } from './styles';
 
 interface CommentsModalProps {
@@ -19,6 +25,7 @@ interface CommentsModalProps {
 	closeModal: () => void;
 	isLiked: boolean;
 	handleLike: () => void;
+	comments: CommentDTO[];
 }
 
 export function CommentsModal({
@@ -26,8 +33,10 @@ export function CommentsModal({
 	closeModal,
 	isLiked,
 	handleLike,
+	comments,
 }: CommentsModalProps) {
 	const theme = useTheme();
+	const { user } = useAuth();
 
 	return (
 		<Modal
@@ -40,6 +49,7 @@ export function CommentsModal({
 			onBackButtonPress={closeModal}
 			onBackdropPress={closeModal}
 			backdropOpacity={0.5}
+			propagateSwipe
 		>
 			<Container>
 				<InteractionBar
@@ -49,12 +59,23 @@ export function CommentsModal({
 					isLiked={isLiked}
 				/>
 
-				<CommentsWrapper></CommentsWrapper>
+				<CommentsWrapper>
+					<CommentsList
+						scrollEnabled
+						data={comments}
+						keyExtractor={(item) => item.id}
+						renderItem={({ item }) => (
+							<Comment user={item.user} content={item.content} />
+						)}
+					/>
+				</CommentsWrapper>
 
 				<CommentInput>
+					<UserPicture source={{ uri: user.picture }} />
 					<Input
 						testID="input-comment"
 						placeholder="Escreva um comentário..."
+						multiline
 					/>
 
 					<SendButton testID="button-send">
