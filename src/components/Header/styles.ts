@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { BorderlessButton } from 'react-native-gesture-handler';
+import { MotiImage, MotiText } from 'moti';
 
 export const Container = styled.View`
 	width: 100%;
@@ -19,7 +20,7 @@ export const Container = styled.View`
 	elevation: 10;
 `;
 
-export const Logo = styled.Text`
+export const Logo = styled(MotiText)`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
 	font-size: ${RFValue(25)}px;
 	color: ${({ theme }) => theme.colors.shape};
@@ -30,7 +31,7 @@ export const User = styled.View`
 	align-items: center;
 `;
 
-export const Picture = styled.Image`
+export const Picture = styled(MotiImage)`
 	width: ${RFValue(50)}px;
 	height: ${RFValue(50)}px;
 

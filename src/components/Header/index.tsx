@@ -29,7 +29,11 @@ export function Header() {
 		<Container testID="header">
 			{currentScreen === 'ClientDashboard' && (
 				<User testID="user-info">
-					<Picture source={{ uri: user.picture }} />
+					<Picture
+						source={{ uri: user.picture }}
+						from={{ scale: 0 }}
+						animate={{ scale: 1 }}
+					/>
 					<Username testID="user-name">{user.first_name}</Username>
 				</User>
 			)}
@@ -48,7 +52,15 @@ export function Header() {
 				</BackButton>
 			)}
 
-			<Logo>MyCardapp</Logo>
+			<Logo
+				from={
+					currentScreen === 'ClientDashboard' && { opacity: 0, translateX: 300 }
+				}
+				animate={{ opacity: 1, translateX: 0 }}
+				transition={{ type: 'timing', duration: 500 }}
+			>
+				MyCardapp
+			</Logo>
 		</Container>
 	);
 }
