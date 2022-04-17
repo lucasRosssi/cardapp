@@ -110,11 +110,54 @@
 							"like_count": 225
 						},
 						{
+							"id": "1",
 							"name": "Brownie",
 							"picture": "https://s2.glbimg.com/uFaCr69b1r-U1W9PRowmypuhCDE=/smart/e.glbimg.com/og/ed/f/original/2017/02/22/receita-brownie-chocolate-chips.jpg",
 							"price": 33,
 							"details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque neque sit esse vitae eum fugiat optio nihil rem non omnis aperiam nam ad, excepturi suscipit voluptate odio magnam mollitia fugit!",
-							"like_count": 256
+							"like_count": 256,
+							"comments": [
+								{
+									"id": "1",
+									"user": {
+										"name": "Camila",
+										"picture": "https://img.freepik.com/fotos-gratis/mulher-jovem-e-elegante-magnifica-com-grandes-olhos-castanhos-e-um-sorriso-incrivel_291049-2578.jpg?size=626&ext=jpg&ga=GA1.2.1154805664.1639612800"
+									},
+									"content": "Delicioso! O melhor que já comi!"
+								},
+								{
+									"id": "2",
+									"user": {
+										"name": "Anderson",
+										"picture": "https://images.ctfassets.net/opz1rk40r4ou/6jerGmIyCM9BMZDwFoTEFj/9e58775c25627617f3203551f615bb8f/Jason_Derulo.jpg?w=1280&q=90&fm=jpg"
+									},
+									"content": "Muito gostoso!"
+								},
+								{
+									"id": "3",
+									"user": {
+										"name": "Jake",
+										"picture": "https://img.estadao.com.br/thumbs/640/resources/jpg/6/5/1648487270756.jpg"
+									},
+									"content": "Divino!"
+								},
+								{
+									"id": "4",
+									"user": {
+										"name": "Natasha",
+										"picture": "https://amazonasatual.com.br/wp-content/uploads/2019/10/Jennifer-Lopez.jpg"
+									},
+									"content": "Amei, muito bom."
+								},
+								{
+									"id": "5",
+									"user": {
+										"name": "Carlos",
+										"picture": "https://observatoriodocinema.uol.com.br/wp-content/uploads/2021/10/dwayne-johnson-the-rock.webp"
+									},
+									"content": "Nota 10, estava muito saboroso"
+								}
+							]
 						},
 						{
 							"name": "Carpaccio Doce",
@@ -306,6 +349,58 @@
 							"like_count": 1020
 						}
 					]
+				}
+			]
+		}
+	],
+	"dishes": [
+		{
+			"id": "1",
+			"name": "Brownie",
+			"picture": "https://s2.glbimg.com/uFaCr69b1r-U1W9PRowmypuhCDE=/smart/e.glbimg.com/og/ed/f/original/2017/02/22/receita-brownie-chocolate-chips.jpg",
+			"price": 33,
+			"details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque neque sit esse vitae eum fugiat optio nihil rem non omnis aperiam nam ad, excepturi suscipit voluptate odio magnam mollitia fugit!",
+			"like_count": 256,
+			"comments": [
+				{
+					"id": "1",
+					"user": {
+						"name": "Camila",
+						"picture": "https://img.freepik.com/fotos-gratis/mulher-jovem-e-elegante-magnifica-com-grandes-olhos-castanhos-e-um-sorriso-incrivel_291049-2578.jpg?size=626&ext=jpg&ga=GA1.2.1154805664.1639612800"
+					},
+					"content": "Delicioso! O melhor que já comi!"
+				},
+				{
+					"id": "2",
+					"user": {
+						"name": "Anderson",
+						"picture": "https://images.ctfassets.net/opz1rk40r4ou/6jerGmIyCM9BMZDwFoTEFj/9e58775c25627617f3203551f615bb8f/Jason_Derulo.jpg?w=1280&q=90&fm=jpg"
+					},
+					"content": "Muito gostoso!"
+				},
+				{
+					"id": "3",
+					"user": {
+						"name": "Jake",
+						"picture": "https://img.estadao.com.br/thumbs/640/resources/jpg/6/5/1648487270756.jpg"
+					},
+					"content": "Divino!"
+				},
+				{
+					"id": "4",
+					"user": {
+						"name": "Natasha",
+						"picture": "https://amazonasatual.com.br/wp-content/uploads/2019/10/Jennifer-Lopez.jpg"
+					},
+					"content": "Amei, muito bom."
+				},
+				{
+					"id": "5",
+					"user": {
+						"name": "Carlos",
+						"picture": "https://observatoriodocinema.uol.com.br/wp-content/uploads/2021/10/dwayne-johnson-the-rock.webp"
+					},
+					"content": "Nota 10, estava muito saboroso"
 				}
 			]
 		}
