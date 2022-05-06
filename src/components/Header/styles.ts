@@ -7,7 +7,6 @@ import { MotiImage, MotiText } from 'moti';
 
 export const Container = styled.View`
 	width: 100%;
-	height: ${RFValue(100)}px;
 
 	background-color: ${({ theme }) => theme.colors.primary};
 
@@ -15,7 +14,7 @@ export const Container = styled.View`
 	justify-content: space-between;
 	align-items: center;
 
-	padding: ${getStatusBarHeight() + 10}px 25px 10px 25px;
+	padding: ${getStatusBarHeight()}px 25px 10px 25px;
 
 	elevation: 10;
 `;
