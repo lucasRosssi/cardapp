@@ -6,7 +6,7 @@ export default {
 		primary: '#59B7FF',
 		primary_light: '#ADF0FF',
 		secondary: '#454545',
-		shape: '#F7F7F7',
+		shape: '#FCFCFC',
 		success: '#5CD65A',
 		attention: '#E62929',
 		separator: '#D4D4D4',
