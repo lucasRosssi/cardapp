@@ -1,12 +1,22 @@
 import React, { createContext, ReactNode, useState } from 'react';
+import { Alert } from 'react-native';
 import { EstablishmentDTO } from '../dtos/EstablishmentDTO';
 import { UserDTO } from '../dtos/UserDTO';
+import { api } from '../services/api';
+
+interface SignInCredentials {
+	email: string;
+	password: string;
+}
 
 export interface IAuthContextData {
 	user: UserDTO;
 	company: EstablishmentDTO;
+
 	handleUpdateUser: (data: UserDTO) => void;
 	handleUpdateCompany: (data: EstablishmentDTO) => void;
+
+	signIn: (data: SignInCredentials) => Promise<void>;
 }
 
 interface AuthContextProps {
@@ -42,6 +52,19 @@ export function AuthProvider({ children }: AuthContextProps) {
 		setCompany(data);
 	}
 
+	async function signIn({ email, password }: SignInCredentials) {
+		try {
+			const response = await api.get('/users');
+			const usersList: UserDTO[] = response.data;
+			const user = usersList.find((user) => user.email === email);
+
+			setUser(user!);
+		} catch (error) {
+			Alert.alert('Erro', 'Falha ao fazer login!');
+			throw new Error('Failed to sign in!');
+		}
+	}
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -49,6 +72,7 @@ export function AuthProvider({ children }: AuthContextProps) {
 				company,
 				handleUpdateUser,
 				handleUpdateCompany,
+				signIn,
 			}}
 		>
 			{children}
