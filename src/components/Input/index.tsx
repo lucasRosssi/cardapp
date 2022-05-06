@@ -1,21 +1,37 @@
 import React from 'react';
+import { Control, Controller } from 'react-hook-form';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 
 import { Container, Placeholder, TextInput, Error } from './styles';
 
 interface InputProps extends TextInputProps {
 	topPlaceholder: string;
-	error?: string;
 	style?: StyleProp<ViewStyle>;
+	control: Control;
+	name: string;
+	error?: string;
 }
 
-export function Input({ topPlaceholder, error, style, ...rest }: InputProps) {
+export function Input({
+	topPlaceholder,
+	style,
+	control,
+	name,
+	error,
+	...rest
+}: InputProps) {
 	return (
-		<Container style={style}>
-			<Placeholder>{topPlaceholder}</Placeholder>
-			<TextInput {...rest} />
+		<Controller
+			control={control}
+			name={name}
+			render={({ field: { onChange, value } }) => (
+				<Container style={style}>
+					<Placeholder>{topPlaceholder}</Placeholder>
+					<TextInput value={value} onChangeText={onChange} {...rest} />
 
-			<Error>{error && error}</Error>
-		</Container>
+					{error && <Error>{error}</Error>}
+				</Container>
+			)}
+		/>
 	);
 }
