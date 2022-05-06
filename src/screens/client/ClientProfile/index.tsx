@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
-import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import * as ImagePicker from 'expo-image-picker';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Header } from '../../../components/Header';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
+import { AppIcon } from '../../../components/AppIcon';
 
 import {
 	Container,
@@ -18,18 +21,29 @@ import {
 	CameraWrapper,
 	FormWrapper,
 } from './styles';
-import { AppIcon } from '../../../components/AppIcon';
+
+interface FormData {
+	full_name: string;
+	city: string;
+}
+
+const schema = Yup.object().shape({
+	full_name: Yup.string().required('É necessário digitar um nome'),
+	city: Yup.string().required('É necessário digitar uma cidade'),
+});
 
 export function ClientProfile() {
 	const theme = useTheme();
 	const { user, handleUpdateUser } = useAuth();
-	const { navigate } = useNavigation();
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<any>({
+		resolver: yupResolver(schema),
+	});
 
 	const [picture, setPicture] = useState(user.picture);
-	const [fullName, setFullName] = useState(user.full_name);
-	const [fullNameError, setFullNameError] = useState('');
-	const [city, setCity] = useState(user.city);
-	const [cityError, setCityError] = useState('');
 
 	const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
@@ -54,43 +68,17 @@ export function ClientProfile() {
 		}
 	}
 
-	function handleTypeName(value: string) {
-		setFullName(value);
-		if (fullNameError) {
-			setFullNameError('');
-		}
-	}
-
-	function handleTypeCity(value: string) {
-		setCity(value);
-		if (cityError) {
-			setCityError('');
-		}
-	}
-
-	function handleUpdateChanges() {
-		if (!fullName) {
-			setFullNameError('É necessário digitar um nome');
-		}
-		if (!city) {
-			setCityError('É necessário digitar uma cidade');
-		}
-
-		if (!fullName || !city) {
-			return;
-		}
-
-		const formattedFullName = fullName.trim();
+	function handleUpdateChanges(form: FormData) {
+		const formattedFullName = form.full_name.trim();
 		const firstName = formattedFullName.split(' ')[0];
 
 		handleUpdateUser({
 			...user,
-			full_name: fullName,
+			full_name: form.full_name,
 			first_name: firstName,
-			city,
+			city: form.city,
 			picture,
 		});
-		setFullName(fullName.trim());
 
 		Alert.alert('', 'Dados salvos com sucesso!');
 	}
@@ -132,20 +120,20 @@ export function ClientProfile() {
 
 					<FormWrapper>
 						<Input
+							control={control}
+							name="full_name"
 							topPlaceholder="Nome"
-							value={fullName}
-							onChangeText={handleTypeName}
-							error={fullNameError}
+							error={errors.full_name && errors.full_name.message}
 						/>
 						<Input
+							control={control}
+							name="city"
 							topPlaceholder="Cidade"
-							value={city}
-							onChangeText={handleTypeCity}
-							error={cityError}
+							error={errors.city && errors.city.message}
 						/>
 					</FormWrapper>
 
-					<Button title="Salvar" onPress={handleUpdateChanges} />
+					<Button title="Salvar" onPress={handleSubmit(handleUpdateChanges)} />
 				</Container>
 			</TouchableWithoutFeedback>
 		</>
