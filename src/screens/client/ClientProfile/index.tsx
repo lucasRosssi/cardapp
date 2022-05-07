@@ -124,12 +124,14 @@ export function ClientProfile() {
 							name="full_name"
 							topPlaceholder="Nome"
 							error={errors.full_name && errors.full_name.message}
+							defaultValue={user.full_name}
 						/>
 						<Input
 							control={control}
 							name="city"
 							topPlaceholder="Cidade"
 							error={errors.city && errors.city.message}
+							defaultValue={user.city}
 						/>
 					</FormWrapper>
 
