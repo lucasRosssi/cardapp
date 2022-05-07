@@ -18,7 +18,8 @@ export interface IAuthContextData {
 	handleUpdateUser: (data: UserDTO) => void;
 	handleUpdateCompany: (data: EstablishmentDTO) => void;
 
-	signIn: (data: SignInCredentials) => Promise<void>;
+	signInUser: (data: SignInCredentials) => Promise<void>;
+	signInCompany: (data: SignInCredentials) => Promise<void>;
 	signOut: () => Promise<void>;
 }
 
@@ -46,7 +47,7 @@ export function AuthProvider({ children }: AuthContextProps) {
 			if (userAlreadyExists) {
 				Alert.alert(
 					'E-mail já cadastrado',
-					'Já existe um usuários cadastrado com o e-mail informado!'
+					'Já existe um usuário cadastrado com o e-mail informado!'
 				);
 				return;
 			}
@@ -68,13 +69,17 @@ export function AuthProvider({ children }: AuthContextProps) {
 		setCompany(data);
 	}
 
-	async function signIn({ email, password }: SignInCredentials) {
+	async function signInUser({ email, password }: SignInCredentials) {
 		try {
 			const response = await api.get('/users');
 			const usersList: UserDTO[] = response.data;
 			const user = usersList.find((user) => user.email === email);
 
-			setUser(user!);
+			if (user) {
+				setUser(user);
+			} else {
+				Alert.alert('Cliente', 'Email e senha inválidos!');
+			}
 		} catch (error) {
 			Alert.alert('Erro', 'Falha ao fazer login!');
 			throw new Error('Failed to sign in!');
@@ -83,6 +88,26 @@ export function AuthProvider({ children }: AuthContextProps) {
 
 	async function signOut() {
 		setUser({} as UserDTO);
+		setCompany({} as EstablishmentDTO);
+	}
+
+	async function signInCompany({ email, password }: SignInCredentials) {
+		try {
+			const response = await api.get('/establishments');
+			const establishmentsList: EstablishmentDTO[] = response.data;
+			const establishment = establishmentsList.find(
+				(establishment) => establishment.email === email
+			);
+
+			if (establishment) {
+				setCompany(establishment);
+			} else {
+				Alert.alert('Estabelecimento', 'Email e senha inválidos!');
+			}
+		} catch (error) {
+			Alert.alert('Erro', 'Falha ao fazer login!');
+			throw new Error('Failed to sign in!');
+		}
 	}
 
 	useEffect(() => {
@@ -107,7 +132,8 @@ export function AuthProvider({ children }: AuthContextProps) {
 				createNewUser,
 				handleUpdateUser,
 				handleUpdateCompany,
-				signIn,
+				signInUser,
+				signInCompany,
 				signOut,
 			}}
 		>
