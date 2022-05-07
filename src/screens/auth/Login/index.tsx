@@ -29,7 +29,7 @@ const schema = Yup.object().shape({
 
 export function Login() {
 	const theme = useTheme();
-	const { signIn } = useAuth();
+	const { signInUser, signInCompany } = useAuth();
 	const { navigate } = useNavigation();
 	const {
 		control,
@@ -52,8 +52,9 @@ export function Login() {
 		};
 
 		if (isClient) {
-			signIn(data);
+			signInUser(data);
 		} else {
+			signInCompany(data);
 		}
 	}
 
