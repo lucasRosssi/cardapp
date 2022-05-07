@@ -6,7 +6,16 @@ export const Container = styled.View`
 	flex: 1;
 	background-color: ${({ theme }) => theme.colors.background};
 
-	padding: ${getStatusBarHeight() + 100}px 20px 20px;
+	padding: ${getStatusBarHeight() + 20}px 20px 20px;
+`;
+
+export const UserType = styled.View`
+	width: 100%;
+
+	flex-direction: row;
+	justify-content: flex-end;
+
+	margin-bottom: 60px;
 `;
 
 export const Logo = styled.Text`
