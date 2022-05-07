@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../hooks/useAuth';
@@ -5,6 +6,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as ImagePicker from 'expo-image-picker';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Input } from '../../../components/Input';
 
@@ -21,6 +23,7 @@ import { Button } from '../../../components/Button';
 import { AppIcon } from '../../../components/AppIcon';
 import { useTheme } from 'styled-components/native';
 import { Keyboard, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { UserDTO } from '../../../dtos/UserDTO';
 
 interface FormData {
 	email: string;
@@ -42,7 +45,7 @@ const schema = Yup.object().shape({
 
 export function Register() {
 	const theme = useTheme();
-	const {} = useAuth();
+	const { createNewUser } = useAuth();
 	const {
 		control,
 		handleSubmit,
@@ -71,7 +74,24 @@ export function Register() {
 		}
 	}
 
-	function handleRegister(form: FormData) {}
+	function handleRegister(form: FormData) {
+		const firstName = form.full_name.trim().split(' ')[0];
+
+		try {
+			const user: UserDTO = {
+				id: uuidv4(),
+				email: form.email.trim(),
+				full_name: form.full_name.trim(),
+				first_name: firstName,
+				city: form.city.trim(),
+				picture,
+			};
+
+			createNewUser(user);
+		} catch (error) {
+			throw new Error('Failed to create new user account');
+		}
+	}
 
 	useEffect(() => {
 		const showKeyboard = Keyboard.addListener('keyboardDidShow', () =>
