@@ -1,7 +1,8 @@
 import React from 'react';
 import { useTheme } from 'styled-components/native';
-import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../hooks/useAuth';
+import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -26,6 +27,8 @@ const schema = Yup.object().shape({
 
 export function Login() {
 	const theme = useTheme();
+	const { signIn } = useAuth();
+	const { navigate } = useNavigation();
 	const {
 		control,
 		handleSubmit,
@@ -33,7 +36,6 @@ export function Login() {
 	} = useForm<any>({
 		resolver: yupResolver(schema),
 	});
-	const { signIn } = useAuth();
 
 	function handleSignIn(form: FormData) {
 		const data = {
@@ -44,7 +46,9 @@ export function Login() {
 		signIn(data);
 	}
 
-	function handleNewAccount() {}
+	function handleNewAccount() {
+		navigate('Register');
+	}
 
 	return (
 		<Container>
@@ -78,6 +82,7 @@ export function Login() {
 				title="Criar conta"
 				textColor={theme.colors.primary}
 				color={theme.colors.full_light}
+				onPress={handleNewAccount}
 			/>
 		</Container>
 	);
