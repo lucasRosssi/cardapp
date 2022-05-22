@@ -7,13 +7,12 @@ import { AppIcon } from '../AppIcon';
 import { Container, Title } from './styles';
 
 interface CategoryProps {
-	id: string;
 	category: string;
 	dishes: DishDTO[];
 	onPress: () => void;
 }
 
-export function Category({ id, category, dishes, onPress }: CategoryProps) {
+export function Category({ category, dishes, onPress }: CategoryProps) {
 	const theme = useTheme();
 
 	return (
