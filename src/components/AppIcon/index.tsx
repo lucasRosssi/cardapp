@@ -38,88 +38,83 @@ export interface AppIconProps {
 	color?: string;
 }
 
-export function AppIcon({ name, size = RFValue(30), color }: AppIconProps) {
-	return (
-		<>
-			{name === 'camera' && (
-				<Feather name="camera" size={RFValue(size)} color={color} />
-			)}
-			{name === 'chevron-down' && (
-				<Feather name="chevron-down" size={RFValue(size)} color={color} />
-			)}
-			{name === 'chevron-left' && (
-				<Feather name="chevron-left" size={RFValue(size)} color={color} />
-			)}
-			{name === 'chevron-right' && (
+export function AppIcon({ name, size = 30, color }: AppIconProps) {
+	switch (name) {
+		case 'camera':
+			return <Feather name="camera" size={RFValue(size)} color={color} />;
+		case 'chevron-down':
+			return <Feather name="chevron-down" size={RFValue(size)} color={color} />;
+		case 'chevron-left':
+			return <Feather name="chevron-left" size={RFValue(size)} color={color} />;
+		case 'chevron-right':
+			return (
 				<Feather name="chevron-right" size={RFValue(size)} color={color} />
-			)}
-			{name === 'comment' && (
+			);
+		case 'comment':
+			return (
 				<MaterialCommunityIcons
 					name="comment-outline"
 					size={RFValue(size)}
 					color={color}
 				/>
-			)}
-			{name === 'food-menu' && (
+			);
+		case 'food-menu':
+			return (
 				<MaterialIcons name="menu-book" size={RFValue(size)} color={color} />
-			)}
-			{name === 'gallery' && (
-				<Ionicons name="camera" size={RFValue(size)} color={color} />
-			)}
-			{name === 'help' && (
+			);
+		case 'gallery':
+			return <Ionicons name="camera" size={RFValue(size)} color={color} />;
+		case 'help':
+			return (
 				<MaterialIcons name="help-outline" size={RFValue(size)} color={color} />
-			)}
-			{name === 'info' && (
+			);
+		case 'info':
+			return (
 				<Ionicons
 					name="md-information-circle-outline"
 					size={RFValue(size)}
 					color={color}
 				/>
-			)}
-			{name === 'like-fill' && (
-				<AntDesign name="like1" size={RFValue(size)} color={color} />
-			)}
-			{name === 'like-outline' && (
-				<AntDesign name="like2" size={RFValue(size)} color={color} />
-			)}
-			{name === 'location' && (
+			);
+		case 'like-fill':
+			return <AntDesign name="like1" size={RFValue(size)} color={color} />;
+		case 'like-outline':
+			return <AntDesign name="like2" size={RFValue(size)} color={color} />;
+		case 'location':
+			return (
 				<Ionicons name="location-sharp" size={RFValue(size)} color={color} />
-			)}
-			{name === 'menu' && (
-				<Feather name="menu" size={RFValue(size)} color={color} />
-			)}
-			{name === 'plus' && (
-				<Feather name="plus" size={RFValue(size)} color={color} />
-			)}
-			{name === 'power' && (
-				<Feather name="power" size={RFValue(size)} color={color} />
-			)}
-			{name === 'random-food' && (
+			);
+		case 'menu':
+			return <Feather name="menu" size={RFValue(size)} color={color} />;
+		case 'plus':
+			return <Feather name="plus" size={RFValue(size)} color={color} />;
+		case 'power':
+			return <Feather name="power" size={RFValue(size)} color={color} />;
+		case 'random-food':
+			return (
 				<MaterialCommunityIcons
 					name="food-fork-drink"
 					size={RFValue(size)}
 					color={color}
 				/>
-			)}
-			{name === 'restaurant' && (
-				<Ionicons name="restaurant" size={RFValue(size)} color={color} />
-			)}
-			{name === 'send' && (
-				<Ionicons name="send-sharp" size={RFValue(size)} color={color} />
-			)}
-			{name === 'settings' && (
+			);
+		case 'restaurant':
+			return <Ionicons name="restaurant" size={RFValue(size)} color={color} />;
+		case 'send':
+			return <Ionicons name="send-sharp" size={RFValue(size)} color={color} />;
+		case 'settings':
+			return (
 				<Ionicons name="settings-sharp" size={RFValue(size)} color={color} />
-			)}
-			{name === 'star' && (
-				<Ionicons name="star" size={RFValue(size)} color={color} />
-			)}
-			{name === 'store' && (
-				<MaterialIcons name="store" size={RFValue(size)} color={color} />
-			)}
-			{name === 'user' && (
-				<Feather name="user" size={RFValue(size)} color={color} />
-			)}
-			{name === 'x' && <Feather name="x" size={RFValue(size)} color={color} />}
-		</>
-	);
+			);
+		case 'star':
+			return <Ionicons name="star" size={RFValue(size)} color={color} />;
+		case 'store':
+			return <MaterialIcons name="store" size={RFValue(size)} color={color} />;
+		case 'user':
+			return <Feather name="user" size={RFValue(size)} color={color} />;
+		case 'x':
+			<Feather name="x" size={RFValue(size)} color={color} />;
+		case undefined:
+			return <></>;
+	}
 }
