@@ -1,5 +1,4 @@
 interface DishDTO {
-	id: string;
 	name: string;
 	price: number;
 	picture: string;
@@ -8,7 +7,6 @@ interface DishDTO {
 }
 
 interface MenuDTO {
-	id: string;
 	category: string;
 	dishes: DishDTO[];
 }
