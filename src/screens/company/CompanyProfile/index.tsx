@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as ImagePicker from 'expo-image-picker';
 
 import { Header } from '../../../components/Header';
 import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
+import { AppIcon } from '../../../components/AppIcon';
+
+import { api } from '../../../services/api';
 
 import {
 	Container,
@@ -17,23 +23,38 @@ import {
 	CameraWrapper,
 	FormWrapper,
 } from './styles';
-import { AppIcon } from '../../../components/AppIcon';
+
+interface FormData {
+	name: string;
+	address: string;
+	phone: string;
+}
+
+const schema = Yup.object().shape({
+	name: Yup.string().required('É necessário digitar o nome do estabelecimento'),
+	address: Yup.string().required('É necessário digitar o endereço'),
+	phone: Yup.string().required('É necessário digitar um número de telefone'),
+});
 
 export function CompanyProfile() {
 	const theme = useTheme();
 	const { company, handleUpdateCompany } = useAuth();
 
-	const [picture, setPicture] = useState(company.picture);
-	const [name, setName] = useState(company.name);
-	const [address, setAddress] = useState(company.address);
-	const [email, setEmail] = useState(company.email);
-	const [phone, setPhone] = useState(company.phone);
-	const [nameError, setNameError] = useState('');
-	const [addressError, setAddressError] = useState('');
-	const [emailError, setEmailError] = useState('');
-	const [phoneError, setPhoneError] = useState('');
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<any>({
+		resolver: yupResolver(schema),
+		defaultValues: {
+			name: company.name,
+			address: company.address,
+			phone: company.phone,
+		},
+	});
 
 	const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+	const [picture, setPicture] = useState(company.picture);
 
 	async function handleChangeProfilePicture() {
 		let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -56,68 +77,19 @@ export function CompanyProfile() {
 		}
 	}
 
-	function handleTypeName(value: string) {
-		setName(value);
-		if (nameError) {
-			setNameError('');
-		}
-	}
+	async function handleUpdateChanges(form: FormData) {
+		try {
+			const data = {
+				picture,
+				name: form.name.trim(),
+				address: form.address.trim(),
+				phone: form.phone.trim(),
+			};
 
-	function handleTypeAddress(value: string) {
-		setAddress(value);
-		if (addressError) {
-			setAddressError('');
+			await api.put(`/establishments/${company.id}`, data);
+		} catch (error: any) {
+			Alert.alert('Erro', error.message);
 		}
-	}
-
-	function handleTypeEmail(value: string) {
-		setEmail(value);
-		if (emailError) {
-			setEmailError('');
-		}
-	}
-
-	function handleTypePhone(value: string) {
-		setPhone(value);
-		if (phoneError) {
-			setPhoneError('');
-		}
-	}
-
-	function handleUpdateChanges() {
-		if (!name) {
-			setNameError('É necessário digitar um nome');
-		}
-		if (!address) {
-			setAddressError('É necessário digitar um endereço');
-		}
-		if (!email) {
-			setEmailError('É necessário digitar um email');
-		}
-		if (!phone) {
-			setPhoneError('É necessário digitar um telefone');
-		}
-
-		if (!name || !address || !email || !phone) {
-			return;
-		}
-
-		const formattedName = name.trim();
-		const formattedAddress = address.trim();
-		const formattedEmail = email.trim();
-		const formattedPhone = phone.trim();
-
-		handleUpdateCompany({
-			...company,
-			name: formattedName,
-			address: formattedAddress,
-			picture,
-			email: formattedEmail,
-			phone: formattedPhone,
-		});
-		setName(name.trim());
-
-		Alert.alert('', 'Dados salvos com sucesso!');
 	}
 
 	useEffect(() => {
@@ -157,34 +129,30 @@ export function CompanyProfile() {
 
 					<FormWrapper>
 						<Input
+							control={control}
+							name="name"
 							topPlaceholder="Nome"
-							value={name}
-							onChangeText={handleTypeName}
-							error={nameError}
+							error={errors.name?.message}
+							defaultValue={company.name}
 						/>
 						<Input
+							control={control}
+							name="address"
 							topPlaceholder="Endereço"
-							value={address}
-							onChangeText={handleTypeAddress}
-							error={addressError}
+							error={errors.address?.message}
+							defaultValue={company.address}
 						/>
 						<Input
-							topPlaceholder="E-mail"
-							value={email}
-							onChangeText={handleTypeEmail}
-							error={emailError}
-							keyboardType="email-address"
-						/>
-						<Input
+							control={control}
+							name="phone"
 							topPlaceholder="Telefone"
-							value={phone}
-							onChangeText={handleTypePhone}
-							error={phoneError}
+							error={errors.phone?.message}
 							keyboardType="numeric"
+							defaultValue={company.phone}
 						/>
 					</FormWrapper>
 
-					<Button title="Salvar" onPress={handleUpdateChanges} />
+					<Button title="Salvar" onPress={handleSubmit(handleUpdateChanges)} />
 				</Container>
 			</TouchableWithoutFeedback>
 		</>
