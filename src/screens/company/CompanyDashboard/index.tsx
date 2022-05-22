@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../../hooks/useAuth';
@@ -40,26 +40,26 @@ export function CompanyDashboard() {
 		setIsInputLoading(true);
 
 		const data = {
-			id: String(categories.length + 1),
 			category,
 			dishes: [],
 		};
 
 		setCategories([...categories, data]);
 
-		await api.put(`/establishments/${company.id}`, {
-			...company,
-			menu: [...categories, data],
-		});
+		await api.post(`/establishments/${company.id}/menu`, data);
 
 		setIsInputLoading(false);
 	}
 
 	useEffect(() => {
 		async function fetchCategories() {
-			const response = await api.get(`/establishments/${company.id}`);
-			setCategories(response.data.menu);
-			setIsLoading(false);
+			try {
+				const { data } = await api.get(`/establishments/${company.id}/menu`);
+				setCategories(data);
+				setIsLoading(false);
+			} catch (error: any) {
+				Alert.alert('', error.message);
+			}
 		}
 
 		fetchCategories();
@@ -78,11 +78,10 @@ export function CompanyDashboard() {
 				<CategoriesList
 					ListHeaderComponent={<Title>Categorias</Title>}
 					data={categories}
-					keyExtractor={(item) => item.id}
+					keyExtractor={(item) => item.category}
 					renderItem={({ item }) => (
 						<Category
 							onPress={handleGoToCategory}
-							id={item.id}
 							category={item.category}
 							dishes={item.dishes}
 						/>
