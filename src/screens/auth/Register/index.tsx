@@ -1,14 +1,21 @@
-import 'react-native-get-random-values';
 import React, { useEffect, useState } from 'react';
+import { Alert, Keyboard, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { useTheme } from 'styled-components/native';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../../hooks/useAuth';
+import { useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as ImagePicker from 'expo-image-picker';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Button } from '../../../components/Button';
+import { AppIcon } from '../../../components/AppIcon';
 import { Input } from '../../../components/Input';
+
+import { UserDTO } from '../../../dtos/UserDTO';
+import { EstablishmentDTO } from '../../../dtos/EstablishmentDTO';
 
 import {
 	CameraWrapper,
@@ -19,17 +26,21 @@ import {
 	Profile,
 	NoPicture,
 } from './styles';
-import { Button } from '../../../components/Button';
-import { AppIcon } from '../../../components/AppIcon';
-import { useTheme } from 'styled-components/native';
-import { Keyboard, KeyboardAvoidingView, StatusBar } from 'react-native';
-import { UserDTO } from '../../../dtos/UserDTO';
 
 interface FormData {
 	email: string;
 	password: string;
+
 	full_name: string;
 	city: string;
+
+	name: string;
+	address: string;
+	phone: string;
+}
+
+interface Params {
+	isClient: boolean;
 }
 
 const schema = Yup.object().shape({
@@ -39,16 +50,23 @@ const schema = Yup.object().shape({
 	password: Yup.string()
 		.required('É necessário digitar uma senha')
 		.min(8, 'A senha deve conter no mínimo 8 caracteres'),
+
 	full_name: Yup.string().required('É necessário digitar o seu nome'),
 	city: Yup.string().required('É necessário digitar sua cidade'),
+
+	name: Yup.string().required('É necessário digitar o nome do estabelecimento'),
+	address: Yup.string().required('É necessário digitar o endereço'),
+	phone: Yup.string().required('É necessário digitar um número de telefone'),
 });
 
 export function Register() {
 	const theme = useTheme();
-	const { createNewUser } = useAuth();
+	const { createNewUser, createNewCompany } = useAuth();
+	const route = useRoute();
 	const {
 		control,
 		handleSubmit,
+		setValue,
 		formState: { errors },
 	} = useForm<any>({
 		resolver: yupResolver(schema),
@@ -56,6 +74,7 @@ export function Register() {
 
 	const [picture, setPicture] = useState('');
 	const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+	const { isClient } = route.params as Params;
 
 	async function handleChangeProfilePicture() {
 		let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -75,23 +94,50 @@ export function Register() {
 	}
 
 	function handleRegister(form: FormData) {
-		const firstName = form.full_name.trim().split(' ')[0];
+		if (isClient) {
+			const firstName = form.full_name.trim().split(' ')[0];
 
-		try {
-			const user: UserDTO = {
-				id: uuidv4(),
-				email: form.email.trim(),
-				full_name: form.full_name.trim(),
-				first_name: firstName,
-				city: form.city.trim(),
-				picture,
-			};
+			try {
+				const user: UserDTO = {
+					id: uuidv4(),
+					email: form.email.trim(),
+					full_name: form.full_name.trim(),
+					first_name: firstName,
+					city: form.city.trim(),
+					picture,
+				};
 
-			createNewUser(user);
-		} catch (error) {
-			throw new Error('Failed to create new user account');
+				createNewUser(user);
+			} catch (error: any) {
+				Alert.alert('Erro', error.message);
+			}
+		} else {
+			try {
+				const establishment: EstablishmentDTO = {
+					id: uuidv4(),
+					email: form.email.trim(),
+					name: form.name.trim(),
+					address: form.address.trim(),
+					picture,
+					phone: form.phone,
+					menu: [],
+				};
+
+				createNewCompany(establishment);
+			} catch (error) {}
 		}
 	}
+
+	useEffect(() => {
+		if (isClient) {
+			setValue('name', 'notRequired');
+			setValue('address', 'notRequired');
+			setValue('phone', 'notRequired');
+		} else {
+			setValue('full_name', 'notRequired');
+			setValue('city', 'notRequired');
+		}
+	}, []);
 
 	useEffect(() => {
 		const showKeyboard = Keyboard.addListener('keyboardDidShow', () =>
@@ -140,33 +186,60 @@ export function Register() {
 						keyboardType="email-address"
 						autoCapitalize="none"
 						style={{ marginBottom: 20 }}
-						error={errors.email && errors.email.message}
+						error={errors.email?.message}
 					/>
 					<Input
 						name="password"
 						control={control}
 						topPlaceholder="Senha"
 						secureTextEntry
-						error={errors.password && errors.password.message}
+						error={errors.password?.message}
 					/>
 				</Form>
 
-				<Form>
-					<Input
-						control={control}
-						name="full_name"
-						topPlaceholder="Nome completo"
-						autoCapitalize="sentences"
-						style={{ marginBottom: 20 }}
-						error={errors.full_name && errors.full_name.message}
-					/>
-					<Input
-						name="city"
-						control={control}
-						topPlaceholder="Cidade"
-						error={errors.city && errors.city.message}
-					/>
-				</Form>
+				{isClient ? (
+					<Form>
+						<Input
+							control={control}
+							name="full_name"
+							topPlaceholder="Nome completo"
+							autoCapitalize="sentences"
+							style={{ marginBottom: 20 }}
+							error={errors.full_name?.message}
+						/>
+						<Input
+							name="city"
+							control={control}
+							topPlaceholder="Cidade"
+							error={errors.city?.message}
+						/>
+					</Form>
+				) : (
+					<Form>
+						<Input
+							control={control}
+							name="name"
+							topPlaceholder="Nome do estabelecimento"
+							autoCapitalize="sentences"
+							style={{ marginBottom: 20 }}
+							error={errors.name?.message}
+						/>
+						<Input
+							name="address"
+							control={control}
+							topPlaceholder="Endereço"
+							style={{ marginBottom: 20 }}
+							error={errors.address?.message}
+						/>
+						<Input
+							name="phone"
+							control={control}
+							topPlaceholder="Telefone"
+							keyboardType="numeric"
+							error={errors.phone?.message}
+						/>
+					</Form>
+				)}
 
 				<Button title="Cadastrar" onPress={handleSubmit(handleRegister)} />
 			</KeyboardAvoidingView>
