@@ -6,7 +6,7 @@ import { Register } from '../../screens/auth/Register';
 
 export type AuthParamList = {
 	Login: undefined;
-	Register: undefined;
+	Register: { isClient: boolean };
 };
 
 const { Navigator, Screen } = createStackNavigator<AuthParamList>();
