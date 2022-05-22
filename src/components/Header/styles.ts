@@ -7,6 +7,7 @@ import { MotiImage, MotiText } from 'moti';
 
 export const Container = styled.View`
 	width: 100%;
+	height: ${RFValue(110)}px;
 
 	background-color: ${({ theme }) => theme.colors.primary};
 
