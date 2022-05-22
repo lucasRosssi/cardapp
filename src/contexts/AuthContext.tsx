@@ -15,6 +15,7 @@ export interface IAuthContextData {
 	authStatus: null | 'user' | 'company';
 
 	createNewUser: (data: UserDTO) => Promise<void>;
+	createNewCompany: (data: EstablishmentDTO) => Promise<void>;
 	handleUpdateUser: (data: UserDTO) => void;
 	handleUpdateCompany: (data: EstablishmentDTO) => void;
 
@@ -58,6 +59,16 @@ export function AuthProvider({ children }: AuthContextProps) {
 		} catch (error) {
 			Alert.alert('Erro', 'Falha ao criar nova conta!');
 			throw new Error('Failed to create a new user account');
+		}
+	}
+
+	async function createNewCompany(data: EstablishmentDTO) {
+		try {
+			await api.post('/establishments', data);
+
+			setCompany(data);
+		} catch (error: any) {
+			Alert.alert('Erro', error.message);
 		}
 	}
 
@@ -130,6 +141,7 @@ export function AuthProvider({ children }: AuthContextProps) {
 				company,
 				authStatus,
 				createNewUser,
+				createNewCompany,
 				handleUpdateUser,
 				handleUpdateCompany,
 				signInUser,
