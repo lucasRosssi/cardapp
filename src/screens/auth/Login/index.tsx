@@ -59,7 +59,7 @@ export function Login() {
 	}
 
 	function handleNewAccount() {
-		navigate('Register');
+		navigate('Register', { isClient });
 	}
 
 	return (
@@ -85,14 +85,14 @@ export function Login() {
 					keyboardType="email-address"
 					autoCapitalize="none"
 					style={{ marginBottom: 20 }}
-					error={errors.email && errors.email.message}
+					error={errors.email?.message}
 				/>
 				<Input
 					name="password"
 					control={control}
 					topPlaceholder="Senha"
 					secureTextEntry
-					error={errors.password && errors.password.message}
+					error={errors.password?.message}
 				/>
 			</Form>
 			<Button
