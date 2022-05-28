@@ -26,6 +26,7 @@ import {
 	Profile,
 	NoPicture,
 } from './styles';
+import axios from 'axios';
 
 interface FormData {
 	email: string;
@@ -61,7 +62,7 @@ const schema = Yup.object().shape({
 
 export function Register() {
 	const theme = useTheme();
-	const { createNewUser, createNewCompany } = useAuth();
+	const { createNewUser, createNewCompany, setUser, setCompany } = useAuth();
 	const route = useRoute();
 	const {
 		control,
@@ -93,13 +94,12 @@ export function Register() {
 		}
 	}
 
-	function handleRegister(form: FormData) {
+	async function handleRegister(form: FormData) {
 		if (isClient) {
 			const firstName = form.full_name.trim().split(' ')[0];
 
 			try {
 				const user: UserDTO = {
-					id: uuidv4(),
 					email: form.email.trim(),
 					full_name: form.full_name.trim(),
 					first_name: firstName,
@@ -107,24 +107,28 @@ export function Register() {
 					picture,
 				};
 
-				createNewUser(user);
+				await createNewUser(user);
 			} catch (error: any) {
 				Alert.alert('Erro', error.message);
 			}
 		} else {
 			try {
 				const establishment: EstablishmentDTO = {
-					id: uuidv4(),
 					email: form.email.trim(),
 					name: form.name.trim(),
 					address: form.address.trim(),
 					picture,
 					phone: form.phone,
-					menu: [],
 				};
 
-				createNewCompany(establishment);
-			} catch (error) {}
+				await createNewCompany(establishment);
+			} catch (error) {
+				if (axios.isAxiosError(error)) {
+					Alert.alert('', error.message);
+				} else {
+					Alert.alert('', 'Ocorreu um erro, tente novamente');
+				}
+			}
 		}
 	}
 
