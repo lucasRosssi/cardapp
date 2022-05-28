@@ -4,13 +4,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MenuDTO, DishDTO } from '../../dtos/EstablishmentDTO';
 
 import { ClientDishesMenu } from '../../screens/client/ClientDishesMenu';
-import { ClientDishDetails } from '../../screens/client/ClientDishDetails';
+import {
+	ClientDishDetails,
+	ClientDishDetailsParams,
+} from '../../screens/client/ClientDishDetails';
 import { ClientTabRoutes } from './tab.routes';
 
 export type ClientStackParamList = {
 	ClientHome: undefined;
 	ClientDishesMenu: { name: string; menu: MenuDTO[] };
-	ClientDishDetails: DishDTO;
+	ClientDishDetails: ClientDishDetailsParams;
 };
 
 const { Navigator: StackNavigator, Screen: StackScreen } =

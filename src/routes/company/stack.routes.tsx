@@ -4,13 +4,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { DishDTO } from '../../dtos/EstablishmentDTO';
 
 import { CompanyTabRoutes } from './tab.routes';
-import { CompanyCategoryMenu } from '../../screens/company/CompanyCategoryMenu';
-import { CompanyDishDetails } from '../../screens/company/CompanyDishDetails';
+import {
+	CompanyCategoryMenu,
+	CompanyCategoryMenuParams,
+} from '../../screens/company/CompanyCategoryMenu';
+import {
+	CompanyDishDetails,
+	CompanyDishDetailsParams,
+} from '../../screens/company/CompanyDishDetails';
 
 export type CompanyStackParamList = {
 	CompanyTabRoutes: undefined;
-	CompanyCategoryMenu: undefined;
-	CompanyDishDetails: DishDTO | undefined;
+	CompanyCategoryMenu: CompanyCategoryMenuParams;
+	CompanyDishDetails: CompanyDishDetailsParams | undefined;
 };
 
 const { Navigator: StackNavigator, Screen: StackScreen } =
