@@ -30,6 +30,8 @@ export function ClientDashboard() {
 			fetchEstablishments();
 		}
 
+		console.log(establishments);
+
 		return () => setIsMounted(false);
 	}, []);
 
@@ -44,12 +46,12 @@ export function ClientDashboard() {
 					<EstablishmentsList
 						testID="establishment-card"
 						data={establishments}
-						keyExtractor={(item) => item.id}
+						keyExtractor={(item) => String(item.id)}
 						renderItem={({ item }) => (
 							<EstablishmentCard
 								name={item.name}
 								picture={item.picture}
-								menu={item.menu}
+								menu={item.menus}
 							/>
 						)}
 						ListHeaderComponent={<Title>Estabelecimentos</Title>}
