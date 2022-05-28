@@ -29,7 +29,7 @@ const schema = Yup.object().shape({
 
 export function Login() {
 	const theme = useTheme();
-	const { signInUser, signInCompany } = useAuth();
+	const { signInUser, signInCompany, setUser } = useAuth();
 	const { navigate } = useNavigation();
 	const {
 		control,
@@ -52,7 +52,15 @@ export function Login() {
 		};
 
 		if (isClient) {
-			signInUser(data);
+			// signInUser(data);
+			setUser({
+				full_name: 'Chris Redfield',
+				first_name: 'Chris',
+				city: 'Los Angeles',
+				email: 'chris@redfield.com',
+				picture: ' ',
+				id: '1',
+			});
 		} else {
 			signInCompany(data);
 		}
