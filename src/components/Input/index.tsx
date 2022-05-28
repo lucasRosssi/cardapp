@@ -1,6 +1,11 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
+import {
+	StyleProp,
+	TextInput as TextInputNative,
+	TextInputProps,
+	ViewStyle,
+} from 'react-native';
 
 import { Container, Placeholder, TextInput, Error } from './styles';
 
@@ -10,16 +15,18 @@ interface InputProps extends TextInputProps {
 	control: Control;
 	name: string;
 	error?: string;
+	ref?: React.Ref<TextInputNative>;
 }
 
-export function Input({
+export const Input: React.FC<InputProps> = ({
 	topPlaceholder,
 	style,
 	control,
 	name,
 	error,
+	ref,
 	...rest
-}: InputProps) {
+}) => {
 	return (
 		<Controller
 			control={control}
@@ -27,11 +34,16 @@ export function Input({
 			render={({ field: { onChange, value } }) => (
 				<Container style={style}>
 					<Placeholder>{topPlaceholder}</Placeholder>
-					<TextInput value={value} onChangeText={onChange} {...rest} />
+					<TextInput
+						ref={ref}
+						value={value}
+						onChangeText={onChange}
+						{...rest}
+					/>
 
 					{error && <Error>{error}</Error>}
 				</Container>
 			)}
 		/>
 	);
-}
+};

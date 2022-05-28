@@ -7,32 +7,32 @@ import { Separator } from '../Separator';
 import { Container, Content, Likes, Name, Picture, Price } from './styles';
 import { useAuth } from '../../hooks/useAuth';
 import { AppIcon } from '../AppIcon';
+import { formatMoney } from '../../utils/formatMoney';
 
 interface DishCardProps {
-	id: string;
 	name: string;
 	price: number;
 	picture: string;
 	details: string;
 	like_count: number;
+	onPress: () => void;
 }
 
 export function DishCard({
-	id,
 	name,
 	picture,
 	price,
 	details,
 	like_count,
+	onPress,
 }: DishCardProps) {
 	const theme = useTheme();
 	const { navigate } = useNavigation();
-	const { user, company } = useAuth();
+	const { authStatus } = useAuth();
 
 	function readDetails() {
-		if (user.id) {
+		if (authStatus === 'user') {
 			navigate('ClientDishDetails', {
-				id,
 				name,
 				price,
 				picture,
@@ -41,15 +41,12 @@ export function DishCard({
 			});
 		}
 
-		/*if (company.id) {
-			navigate('CompanyDishDetails', {
-				name,
-				price,
-				picture,
-				details,
-			});
-		}*/
+		if (authStatus === 'company') {
+			onPress();
+		}
 	}
+
+	const formattedPrice = formatMoney(price);
 
 	return (
 		<Container testID="card-dish" onPress={readDetails}>
@@ -64,7 +61,7 @@ export function DishCard({
 			<Content>
 				<Name>{name}</Name>
 
-				<Price>R$ {price}</Price>
+				<Price>R$ {formattedPrice}</Price>
 
 				<Likes>
 					<AppIcon name="like-fill" color={theme.colors.primary} size={10} />{' '}
