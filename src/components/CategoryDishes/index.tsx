@@ -27,12 +27,12 @@ export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 				keyExtractor={(item) => item.name}
 				renderItem={({ item }) => (
 					<DishCard
-						id={item.id}
 						name={item.name}
 						picture={item.picture}
 						price={item.price}
 						details={item.details}
 						like_count={item.like_count}
+						onPress={() => {}}
 					/>
 				)}
 				initialNumToRender={4}
