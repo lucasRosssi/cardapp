@@ -32,8 +32,8 @@ export function CompanyDashboard() {
 		setIsVisible(true);
 	}
 
-	function handleGoToCategory() {
-		navigate('CompanyCategoryMenu');
+	function handleGoToCategory(category: string) {
+		navigate('CompanyCategoryMenu', { category });
 	}
 
 	async function handleCreateNewCategory(category: string) {
@@ -81,7 +81,7 @@ export function CompanyDashboard() {
 					keyExtractor={(item) => item.category}
 					renderItem={({ item }) => (
 						<Category
-							onPress={handleGoToCategory}
+							onPress={() => handleGoToCategory(item.category)}
 							category={item.category}
 							dishes={item.dishes}
 						/>

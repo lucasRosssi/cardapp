@@ -81,14 +81,19 @@ export const ChangePicture = styled.TouchableOpacity.attrs({
 	justify-content: center;
 `;
 
-export const DetailsInput = styled(Input)`
+export const DetailsInputContainer = styled.Pressable`
 	height: 33%;
+	background-color: ${({ theme }) => theme.colors.shape};
 
+	border-radius: 10px;
+
+	margin-top: 30px;
+	margin-bottom: 20px;
+`;
+
+export const DetailsInput = styled(Input)`
 	font-family: ${({ theme }) => theme.fonts.primary};
 	font-size: ${RFValue(14)}px;
 	color: ${({ theme }) => theme.colors.text};
 	text-align: justify;
-
-	margin-top: 30px;
-	margin-bottom: 20px;
 `;

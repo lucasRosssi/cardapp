@@ -38,7 +38,7 @@ const schema = Yup.object().shape({
 
 export function CompanyProfile() {
 	const theme = useTheme();
-	const { company, handleUpdateCompany } = useAuth();
+	const { company, setCompany } = useAuth();
 
 	const {
 		control,
@@ -66,14 +66,8 @@ export function CompanyProfile() {
 			quality: 1,
 		});
 
-		console.log(result);
-
 		if (!result.cancelled) {
 			setPicture(result.uri);
-			handleUpdateCompany({
-				...company,
-				picture: result.uri,
-			});
 		}
 	}
 

@@ -1,9 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
-import { AppIcon } from '../../../components/AppIcon';
-import { DishCard } from '../../../components/DishCard';
+import { useAuth } from '../../../hooks/useAuth';
+
+import { api } from '../../../services/api';
+
 import { Header } from '../../../components/Header';
+import { AppIcon } from '../../../components/AppIcon';
+import { LoadingIndicator } from '../../../components/LoadingIndicator';
+import { DishCard } from '../../../components/DishCard';
+import { DishDTO } from '../../../dtos/EstablishmentDTO';
 
 import {
 	AddItemButton,
@@ -13,25 +19,55 @@ import {
 	DishesList,
 } from './styles';
 
+export interface CompanyCategoryMenuParams {
+	category: string;
+}
+
 export function CompanyCategoryMenu() {
 	const theme = useTheme();
+	const { params: routeParams } = useRoute();
 	const { navigate } = useNavigation();
+	const { company } = useAuth();
 
-	const list = [
-		{
-			name: 'Caipirinha',
-			price: 20,
-			picture:
-				'https://img.estadao.com.br/fotos/crop/1200x1200/resources/jpg/9/3/1532640931039.jpg',
-			details:
-				'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, ipsam ullam, quisquam nesciunt officiis nostrum optio dolorem voluptate soluta facilis hic ut! Corporis eligendi labore perspiciatis, dicta expedita sit suscipit.',
-			like_count: 113,
-		},
-	];
+	const [isLoading, setIsLoading] = useState(true);
+	const [menu, setMenu] = useState<DishDTO[]>([]);
+
+	const params = useMemo(
+		() => routeParams as CompanyCategoryMenuParams,
+		[routeParams]
+	);
 
 	function handleAddNewItem() {
-		navigate('CompanyDishDetails');
+		navigate('CompanyDishDetails', {
+			category: params.category,
+			menu,
+			setMenu,
+			isEditing: false,
+		});
 	}
+
+	function handleViewItem(item: DishDTO) {
+		navigate('CompanyDishDetails', {
+			...item,
+			category: params.category,
+			menu,
+			setMenu,
+			isEditing: true,
+		});
+	}
+
+	useEffect(() => {
+		async function fetchCategoryMenu() {
+			const response = await api.get(
+				`/establishments/${company.id}/menu/${params.category}/dishes`
+			);
+
+			setMenu(response.data);
+			setIsLoading(false);
+		}
+
+		fetchCategoryMenu();
+	}, []);
 
 	return (
 		<>
@@ -39,22 +75,27 @@ export function CompanyCategoryMenu() {
 			<Container>
 				<TitleWrapper>
 					<AppIcon name="food-menu" color={theme.colors.primary} />
-					<Title>Drinks</Title>
+					<Title>{params.category}</Title>
 				</TitleWrapper>
 
-				<DishesList
-					data={list}
-					keyExtractor={(item) => String(item)}
-					renderItem={({ item }) => (
-						<DishCard
-							name={item.name}
-							price={item.price}
-							picture={item.picture}
-							details={item.details}
-							like_count={item.like_count}
-						/>
-					)}
-				/>
+				{isLoading ? (
+					<LoadingIndicator />
+				) : (
+					<DishesList
+						data={menu}
+						keyExtractor={(item) => item.name}
+						renderItem={({ item }) => (
+							<DishCard
+								name={item.name}
+								price={item.price}
+								picture={item.picture}
+								details={item.details}
+								like_count={item.like_count}
+								onPress={() => handleViewItem(item)}
+							/>
+						)}
+					/>
+				)}
 
 				<AddItemButton testID="button-add" onPress={handleAddNewItem}>
 					<AppIcon name="plus" color={theme.colors.primary} />
