@@ -11,13 +11,15 @@ interface SignInCredentials {
 
 export interface IAuthContextData {
 	user: UserDTO;
+	setUser: (user: UserDTO) => void;
 	company: EstablishmentDTO;
+	setCompany: (company: EstablishmentDTO) => void;
 	authStatus: null | 'user' | 'company';
 
 	createNewUser: (data: UserDTO) => Promise<void>;
 	createNewCompany: (data: EstablishmentDTO) => Promise<void>;
-	handleUpdateUser: (data: UserDTO) => void;
-	handleUpdateCompany: (data: EstablishmentDTO) => void;
+
+	getCompanyData: (email: string) => Promise<EstablishmentDTO | undefined>;
 
 	signInUser: (data: SignInCredentials) => Promise<void>;
 	signInCompany: (data: SignInCredentials) => Promise<void>;
@@ -72,12 +74,15 @@ export function AuthProvider({ children }: AuthContextProps) {
 		}
 	}
 
-	function handleUpdateUser(data: UserDTO) {
-		setUser(data);
-	}
+	async function getCompanyData(email: string) {
+		try {
+			const { data }: { data: EstablishmentDTO[] } = await api.get(
+				'/establishments'
+			);
+			const company = data.find((company) => company.email === email);
 
-	function handleUpdateCompany(data: EstablishmentDTO) {
-		setCompany(data);
+			return company;
+		} catch (error) {}
 	}
 
 	async function signInUser({ email, password }: SignInCredentials) {
@@ -138,12 +143,13 @@ export function AuthProvider({ children }: AuthContextProps) {
 		<AuthContext.Provider
 			value={{
 				user,
+				setUser,
 				company,
+				setCompany,
 				authStatus,
 				createNewUser,
 				createNewCompany,
-				handleUpdateUser,
-				handleUpdateCompany,
+				getCompanyData,
 				signInUser,
 				signInCompany,
 				signOut,
