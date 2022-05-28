@@ -9,7 +9,6 @@ export const Container = styled.View`
 
 export const Content = styled.ScrollView.attrs({
 	contentContainerStyle: {
-		width: '100%',
 		paddingVertical: 20,
 	},
 })``;
