@@ -18,7 +18,7 @@ interface EstablishmentDTO {
 	picture: string;
 	email: string;
 	phone: string;
-	menu: MenuDTO[];
+	menus: MenuDTO[];
 }
 
 export { DishDTO, MenuDTO, EstablishmentDTO };
