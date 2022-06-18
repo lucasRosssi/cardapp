@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 
-import { api } from '../../../services/api';
+import { formatMoney } from '../../../utils/formatMoney';
 
 import { Header } from '../../../components/Header';
 import { InteractionBar } from '../../../components/InteractionBar';
 import { CommentsModal } from '../../../components/CommentsModal';
 
-import { ClientStackParamList } from '../../../routes/client/stack.routes';
+import { DishDTO } from '../../../dtos/EstablishmentDTO';
 
 import {
 	Container,
@@ -20,6 +20,8 @@ import {
 	Details,
 } from './styles';
 
+export interface ClientDishDetailsParams extends DishDTO {}
+
 interface CommentProps {
 	id: string;
 	user: {
@@ -30,15 +32,18 @@ interface CommentProps {
 }
 
 export function ClientDishDetails() {
-	const route = useRoute();
+	const { params: routeParams } = useRoute();
 
 	const [isVisible, setIsVisible] = useState(false);
 	const [isLiked, setIsLiked] = useState(false);
 	const [comments, setComments] = useState<CommentProps[]>([]);
 
-	const params = route.params as ClientStackParamList['ClientDishDetails'];
+	const params = useMemo(
+		() => routeParams as ClientDishDetailsParams,
+		[routeParams]
+	);
 
-	const formattedPrice = params.price.toFixed(2).replace('.', ',');
+	const formattedPrice = formatMoney(params.price);
 
 	function handleCommentsOnPress() {
 		setIsVisible(true);
@@ -53,12 +58,7 @@ export function ClientDishDetails() {
 	}
 
 	useEffect(() => {
-		async function fetchComments() {
-			const response = await api.get(`dishes/${params.id}`);
-
-			setComments(response.data.comments);
-			console.log(response.data);
-		}
+		async function fetchComments() {}
 
 		fetchComments();
 	}, []);
