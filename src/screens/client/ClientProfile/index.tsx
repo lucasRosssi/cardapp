@@ -34,7 +34,7 @@ const schema = Yup.object().shape({
 
 export function ClientProfile() {
 	const theme = useTheme();
-	const { user, handleUpdateUser } = useAuth();
+	const { user, setUser } = useAuth();
 	const {
 		control,
 		handleSubmit,
@@ -61,10 +61,6 @@ export function ClientProfile() {
 
 		if (!result.cancelled) {
 			setPicture(result.uri);
-			handleUpdateUser({
-				...user,
-				picture: result.uri,
-			});
 		}
 	}
 
@@ -72,7 +68,7 @@ export function ClientProfile() {
 		const formattedFullName = form.full_name.trim();
 		const firstName = formattedFullName.split(' ')[0];
 
-		handleUpdateUser({
+		setUser({
 			...user,
 			full_name: form.full_name,
 			first_name: firstName,
