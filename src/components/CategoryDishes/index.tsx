@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTheme } from 'styled-components';
 import { DishDTO } from '../../dtos/EstablishmentDTO';
 
 import { AppIcon } from '../AppIcon';
 import { DishCard } from '../DishCard';
+import { LoadingIndicator } from '../LoadingIndicator';
 
 import { CategoryName, CategoryWrapper, Container, DishesList } from './styles';
 
@@ -15,6 +16,23 @@ interface CategoryDishesProps {
 export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 	const theme = useTheme();
 
+	const [slicedDishes, setSlicedDishes] = useState(dishes.slice(0, 10));
+	const [sliceStartIndex, setSliceStartIndex] = useState(10);
+	const [sliceEndIndex, setSliceEndIndex] = useState(20);
+
+	const getNextDishes = useCallback(() => {
+		const nextDishes = dishes.slice(sliceStartIndex, sliceEndIndex);
+
+		setSlicedDishes((oldState) => [...oldState, ...nextDishes]);
+		setSliceStartIndex((oldState) => oldState + 10);
+		setSliceEndIndex((oldState) => oldState + 10);
+	}, []);
+
+	const isThereMoreItems = useMemo(
+		() => slicedDishes.length < dishes.length,
+		[slicedDishes, dishes]
+	);
+
 	return (
 		<Container>
 			<CategoryWrapper>
@@ -23,7 +41,7 @@ export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 				<CategoryName>{category}</CategoryName>
 			</CategoryWrapper>
 			<DishesList
-				data={dishes}
+				data={slicedDishes}
 				keyExtractor={(item) => item.name}
 				renderItem={({ item }) => (
 					<DishCard
@@ -35,7 +53,8 @@ export function CategoryDishes({ category, dishes }: CategoryDishesProps) {
 						onPress={() => {}}
 					/>
 				)}
-				initialNumToRender={4}
+				ListFooterComponent={isThereMoreItems ? <LoadingIndicator /> : <></>}
+				onEndReached={isThereMoreItems ? getNextDishes : undefined}
 			/>
 		</Container>
 	);
