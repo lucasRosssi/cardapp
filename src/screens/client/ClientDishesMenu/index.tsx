@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import { Header } from '../../../components/Header';
 import { CategoryDishes } from '../../../components/CategoryDishes';
 
-import { Container, Content, Title, Categories } from './styles';
+import { Container, Content, Title, CategoriesList } from './styles';
 
 import { MenuDTO } from '../../../dtos/EstablishmentDTO';
 
@@ -18,10 +18,6 @@ export function ClientDishesMenu() {
 
 	const { name, menu } = useMemo(() => params as ClientDishesMenu, [params]);
 
-	const categories_dishes = menu.map(({ category, dishes }) => (
-		<CategoryDishes key={category} category={category} dishes={dishes} />
-	));
-
 	return (
 		<Container>
 			<Header />
@@ -29,7 +25,13 @@ export function ClientDishesMenu() {
 			<Content>
 				<Title>{name}</Title>
 
-				<Categories>{categories_dishes}</Categories>
+				<CategoriesList
+					data={menu}
+					keyExtractor={(item) => item.category}
+					renderItem={({ item }) => (
+						<CategoryDishes category={item.category} dishes={item.dishes} />
+					)}
+				/>
 			</Content>
 		</Container>
 	);

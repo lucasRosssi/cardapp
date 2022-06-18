@@ -1,5 +1,7 @@
+import { FlatList, FlatListProps } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import { MenuDTO } from '../../../dtos/EstablishmentDTO';
 
 export const Container = styled.View`
 	flex: 1;
@@ -23,4 +25,6 @@ export const Title = styled.Text`
 	margin-bottom: 20px;
 `;
 
-export const Categories = styled.View``;
+export const CategoriesList = styled(
+	FlatList as new (props: FlatListProps<MenuDTO>) => FlatList<MenuDTO>
+)``;
