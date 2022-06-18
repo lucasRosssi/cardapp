@@ -9,11 +9,6 @@ export const Container = styled.View`
 	background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Content = styled.View`
-	flex: 1;
-	width: 100%;
-`;
-
 export const Title = styled.Text`
 	font-family: ${({ theme }) => theme.fonts.secondary_bold};
 	font-size: ${RFValue(20)}px;
