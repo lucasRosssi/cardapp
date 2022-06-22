@@ -8,7 +8,7 @@ import { Container, Content, Title, CategoriesList } from './styles';
 
 import { MenuDTO } from '../../../dtos/EstablishmentDTO';
 
-export interface ClientDishesMenu {
+export interface ClientDishesMenuParams {
 	name: string;
 	menu: MenuDTO[];
 }
@@ -16,7 +16,10 @@ export interface ClientDishesMenu {
 export function ClientDishesMenu() {
 	const { params } = useRoute();
 
-	const { name, menu } = useMemo(() => params as ClientDishesMenu, [params]);
+	const { name, menu } = useMemo(
+		() => params as ClientDishesMenuParams,
+		[params]
+	);
 
 	return (
 		<Container>

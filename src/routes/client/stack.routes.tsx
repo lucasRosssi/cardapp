@@ -1,9 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { MenuDTO, DishDTO } from '../../dtos/EstablishmentDTO';
-
-import { ClientDishesMenu } from '../../screens/client/ClientDishesMenu';
+import {
+	ClientDishesMenu,
+	ClientDishesMenuParams,
+} from '../../screens/client/ClientDishesMenu';
 import {
 	ClientDishDetails,
 	ClientDishDetailsParams,
@@ -12,7 +13,7 @@ import { ClientTabRoutes } from './tab.routes';
 
 export type ClientStackParamList = {
 	ClientHome: undefined;
-	ClientDishesMenu: { name: string; menu: MenuDTO[] };
+	ClientDishesMenu: ClientDishesMenuParams;
 	ClientDishDetails: ClientDishDetailsParams;
 };
 
